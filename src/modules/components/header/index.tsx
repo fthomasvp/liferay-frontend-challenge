@@ -1,5 +1,4 @@
 import React from 'react';
-import { formatDistanceToNow } from 'date-fns';
 
 import ClayManagementToolbar from '@clayui/management-toolbar';
 import ClayButton, { ClayButtonWithIcon } from '@clayui/button';
@@ -121,13 +120,7 @@ const Header = ({ addRepository, repositories }: Props): JSX.Element => {
       return;
     }
 
-    // Process `created_at` property to a readable format.
-    const formattedAge = formatDistanceToNow(new Date(repository.created_at), {
-      addSuffix: true,
-    });
-    repository.created_at = formattedAge;
-
-    // Get `date` from the last commit and process it to a readable format.
+    // Get `date` from the last commit
     const [lastCommit] = await fetchRepositoryCommits();
 
     if (!lastCommit) {
@@ -136,10 +129,7 @@ const Header = ({ addRepository, repositories }: Props): JSX.Element => {
     } else {
       const { date } = lastCommit.commit.committer;
 
-      const formattedLastCommitDate = formatDistanceToNow(new Date(date), {
-        addSuffix: true,
-      });
-      repository.lastCommitAt = formattedLastCommitDate;
+      repository.lastCommitAt = date;
     }
 
     addRepository(repository);
