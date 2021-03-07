@@ -1,26 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-function App(): JSX.Element {
+import { ClayIconSpriteContext } from '@clayui/icon';
+import spritemap from '@clayui/css/lib/images/icons/icons.svg';
+
+import Dashboard from 'modules/pages/dashboard';
+
+const App = (): JSX.Element => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ClayIconSpriteContext.Provider value={spritemap}>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Dashboard} />
+        </Switch>
+      </Router>
+    </ClayIconSpriteContext.Provider>
   );
-}
+};
 
 export default App;
