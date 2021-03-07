@@ -24,8 +24,8 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "linebreak-style": ["error", "unix"],
-    "indent": ["warn", 2],
     "quotes": ["warn", "single"],
-    "semi": ["warn", "always"]
+    "semi": ["warn", "always"],
+    "indent": "off"
   }
 }
