@@ -1,0 +1,239 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DynamicListDisplay /> should render correctly 1`] = `
+<div>
+  <div
+    class="container-fluid container-view container-fluid-max-xl"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="col-md-4"
+      >
+        <div
+          class="card card-type-asset"
+        >
+          <div
+            class="card-row"
+            style="height: 50px; align-items: center;"
+          >
+            <img
+              alt="Liferay logo"
+              src="liferay_logo.svg"
+              style="margin-left: 6px;"
+            />
+            <div
+              class="col-8"
+            >
+              <p
+                class="card-title"
+                data-testid="fullName"
+                title="liferay/clay"
+              >
+                <span
+                  class="text-truncate-inline"
+                >
+                  <span
+                    class="text-truncate"
+                  >
+                    liferay/clay
+                  </span>
+                </span>
+              </p>
+            </div>
+            <button
+              aria-label="Star"
+              class="btn btn-monospaced btn-unstyled"
+              type="button"
+            >
+              <svg
+                class="lexicon-icon lexicon-icon-star-o"
+                role="presentation"
+              >
+                <use
+                  xlink:href="#star-o"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="Trash"
+              class="btn btn-monospaced btn-unstyled"
+              type="button"
+            >
+              <svg
+                class="lexicon-icon lexicon-icon-trash"
+                role="presentation"
+              >
+                <use
+                  xlink:href="#trash"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="card-divider"
+            style="margin-top: 0px; margin-bottom: 0px;"
+          />
+          <div
+            class="card-body"
+          >
+            <div
+              class="card-row"
+            >
+              <div
+                class="autofit-col autofit-col-expand"
+              >
+                <section
+                  class="autofit-section"
+                >
+                  <p
+                    class="card-title"
+                    data-testid="stargazersCount"
+                    title="Stars, ,[object Object]"
+                  >
+                    <span
+                      class="text-truncate-inline"
+                    >
+                      <span
+                        class="text-truncate"
+                      >
+                        Stars
+                         
+                        <span
+                          style="font-weight: 400;"
+                        >
+                          156
+                        </span>
+                      </span>
+                    </span>
+                  </p>
+                  <p
+                    class="card-title"
+                    data-testid="forksCount"
+                    title="Forks, ,[object Object]"
+                  >
+                    <span
+                      class="text-truncate-inline"
+                    >
+                      <span
+                        class="text-truncate"
+                      >
+                        Forks
+                         
+                        <span
+                          style="font-weight: 400;"
+                        >
+                          185
+                        </span>
+                      </span>
+                    </span>
+                  </p>
+                  <p
+                    class="card-title"
+                    data-testid="openIssues"
+                    title="Open issues, ,[object Object]"
+                  >
+                    <span
+                      class="text-truncate-inline"
+                    >
+                      <span
+                        class="text-truncate"
+                      >
+                        Open issues
+                         
+                        <span
+                          style="font-weight: 400;"
+                        >
+                          55
+                        </span>
+                      </span>
+                    </span>
+                  </p>
+                  <p
+                    class="card-title"
+                    data-testid="age"
+                    title="Age, ,[object Object]"
+                  >
+                    <span
+                      class="text-truncate-inline"
+                    >
+                      <span
+                        class="text-truncate"
+                      >
+                        Age
+                         
+                        <span
+                          style="font-weight: 400;"
+                        >
+                          over 6 years ago
+                        </span>
+                      </span>
+                    </span>
+                  </p>
+                  <p
+                    class="card-title"
+                    data-testid="lastCommitAt"
+                    title="Last commit, ,[object Object]"
+                  >
+                    <span
+                      class="text-truncate-inline"
+                    >
+                      <span
+                        class="text-truncate"
+                      >
+                        Last commit
+                         
+                        <span
+                          style="font-weight: 400;"
+                        >
+                          3 days ago
+                        </span>
+                      </span>
+                    </span>
+                  </p>
+                  <p
+                    class="card-title"
+                    data-testid="license"
+                    title="License, ,[object Object]"
+                  >
+                    <span
+                      class="text-truncate-inline"
+                    >
+                      <span
+                        class="text-truncate"
+                      >
+                        License
+                         
+                        <span
+                          style="font-weight: 400;"
+                        >
+                          Other
+                        </span>
+                      </span>
+                    </span>
+                  </p>
+                  <div
+                    class="card-detail"
+                  >
+                    <span
+                      class="label label-danger"
+                      data-testid="language"
+                    >
+                      <span
+                        class="label-item label-item-expand"
+                      >
+                        HTML
+                      </span>
+                    </span>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
