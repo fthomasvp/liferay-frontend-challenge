@@ -7,12 +7,12 @@ import ClayLabel from '@clayui/label';
 import { ClayButtonWithIcon } from '@clayui/button';
 
 import ModalDelete from 'modules/components/modal-delete';
-import { GitHubContext } from 'contexts/github';
+import { DashboardContext } from 'contexts/dashboard';
 import lifeRayLogo from 'images/icons/liferay_logo.svg';
 
 const DynamicDisplay = (): JSX.Element => {
   const { repositories, setSelectedRepository } = React.useContext(
-    GitHubContext
+    DashboardContext
   );
 
   const [visible, setVisible] = React.useState(false);

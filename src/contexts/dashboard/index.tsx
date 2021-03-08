@@ -2,15 +2,16 @@ import React from 'react';
 
 import { GitHubRepo } from 'utils/types';
 
-type DashboardContext = {
+type DashboardContextType = {
   repositories: GitHubRepo[];
   addRepository: (repository: GitHubRepo) => void;
   selectedRepository?: GitHubRepo;
   setSelectedRepository: (repository: GitHubRepo) => void;
   deleteRepository: () => void;
+  orderRepositories: (e: any) => void;
 };
 
-export const GitHubContext = React.createContext<DashboardContext>({
+export const DashboardContext = React.createContext<DashboardContextType>({
   repositories: [],
   addRepository: () => console.log('Just for start'),
   selectedRepository: {
@@ -28,4 +29,5 @@ export const GitHubContext = React.createContext<DashboardContext>({
   },
   setSelectedRepository: () => console.log('Just for start'),
   deleteRepository: () => console.log('Just for start'),
+  orderRepositories: () => console.log('Just for start'),
 });
