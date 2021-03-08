@@ -99,7 +99,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         class="text-truncate"
                       >
                         Stars
-                         
+
                         <span
                           style="font-weight: 400;"
                         >
@@ -120,7 +120,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         class="text-truncate"
                       >
                         Forks
-                         
+
                         <span
                           style="font-weight: 400;"
                         >
@@ -141,7 +141,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         class="text-truncate"
                       >
                         Open issues
-                         
+
                         <span
                           style="font-weight: 400;"
                         >
@@ -162,7 +162,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         class="text-truncate"
                       >
                         Age
-                         
+
                         <span
                           style="font-weight: 400;"
                         >
@@ -183,7 +183,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         class="text-truncate"
                       >
                         Last commit
-                         
+
                         <span
                           style="font-weight: 400;"
                         >
@@ -204,7 +204,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         class="text-truncate"
                       >
                         License
-                         
+
                         <span
                           style="font-weight: 400;"
                         >
