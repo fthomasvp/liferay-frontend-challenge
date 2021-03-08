@@ -31,6 +31,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "date-fns": "^2.19.0",
+    "lodash.orderby": "^4.6.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -39,6 +40,7 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
+    "@types/lodash.orderby": "^4.6.6",
     "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
