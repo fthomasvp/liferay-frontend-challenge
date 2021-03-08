@@ -13,9 +13,15 @@ import githubIcon from 'images/icons/github.svg';
 import './styles.css';
 
 const Header = (): JSX.Element => {
-  const { addRepository, orderRepositories, repositories } = React.useContext(
-    DashboardContext
-  );
+  const {
+    repositories,
+    addRepository,
+    filterRepositories,
+    orderRepositories,
+    searchText,
+    setSearchText,
+    setIsFiltering,
+  } = React.useContext(DashboardContext);
 
   const viewTypes = [
     {
@@ -38,7 +44,7 @@ const Header = (): JSX.Element => {
 
   const [searchMobile, setSearchMobile] = React.useState(false);
   const [showPopover, setShowPopover] = React.useState(false);
-  const [repositoryToSearch, setRepositoryToSearch] = React.useState('');
+  const [repositoryToFetch, setRepositoryToFetch] = React.useState('');
   const [errorFeedback, setErrorFeedback] = React.useState('');
 
   const viewTypeActive = viewTypes.find((type) => type.active);
@@ -50,12 +56,12 @@ const Header = (): JSX.Element => {
      * one word character (or more), followed by a slash and again,
      * another word character (or more).
      */
-    if (!repositoryToSearch.match(/\w{1,}\/\w{1,}/gm)) {
+    if (!repositoryToFetch.match(/\w{1,}\/\w{1,}/gm)) {
       setErrorFeedback('This is not a valid repository full name.');
       return;
     }
 
-    const [username, repositoryName] = repositoryToSearch.split('/');
+    const [username, repositoryName] = repositoryToFetch.split('/');
 
     const response = await fetch(
       `https://api.github.com/repos/${username}/${repositoryName}`
@@ -70,7 +76,7 @@ const Header = (): JSX.Element => {
   };
 
   const fetchRepositoryCommits = async () => {
-    const [username, repositoryName] = repositoryToSearch.split('/');
+    const [username, repositoryName] = repositoryToFetch.split('/');
 
     const response = await fetch(
       `https://api.github.com/repos/${username}/${repositoryName}/commits`
@@ -81,18 +87,18 @@ const Header = (): JSX.Element => {
 
   const onClosePopover = () => {
     setShowPopover(false);
-    setRepositoryToSearch('');
+    setRepositoryToFetch('');
     setErrorFeedback('');
   };
 
-  const onChangeRepositoryToSearch = (
+  const onChangeRepositoryToFetch = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setErrorFeedback('');
 
     const { value } = e.target;
 
-    setRepositoryToSearch(value);
+    setRepositoryToFetch(value);
   };
 
   const onAddRepository = async () => {
@@ -132,7 +138,7 @@ const Header = (): JSX.Element => {
     onClosePopover();
   };
 
-  const onKeyPressRepositoryToSearch = (e: React.KeyboardEvent) => {
+  const onKeyPressRepositoryToFetch = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       onAddRepository();
     }
@@ -210,9 +216,19 @@ const Header = (): JSX.Element => {
           <ClayInput.GroupItem>
             <ClayInput
               aria-label="Search"
-              className="form-control input-group-inset input-group-inset-after"
+              className="input-group-inset input-group-inset-after"
               placeholder="e.g. liferay/clay"
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+
+                  setIsFiltering(true);
+                  filterRepositories(searchText);
+                }
+              }}
               type="text"
+              value={searchText}
             />
             <ClayInput.GroupInsetItem after tag="span">
               <ClayButtonWithIcon
@@ -224,7 +240,10 @@ const Header = (): JSX.Element => {
               <ClayButtonWithIcon
                 displayType="unstyled"
                 symbol="search"
-                type="submit"
+                onClick={() => {
+                  filterRepositories(searchText);
+                }}
+                type="button"
               />
             </ClayInput.GroupInsetItem>
           </ClayInput.GroupItem>
@@ -305,9 +324,9 @@ const Header = (): JSX.Element => {
                   <ClayInput
                     data-testid="repositoryTextInput"
                     id="repository"
-                    onChange={onChangeRepositoryToSearch}
-                    onKeyPress={onKeyPressRepositoryToSearch}
-                    value={repositoryToSearch}
+                    onChange={onChangeRepositoryToFetch}
+                    onKeyPress={onKeyPressRepositoryToFetch}
+                    value={repositoryToFetch}
                     placeholder="e.g. liferay/clay"
                     type="text"
                   />

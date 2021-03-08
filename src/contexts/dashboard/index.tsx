@@ -4,16 +4,24 @@ import { GitHubRepo } from 'utils/types';
 
 type DashboardContextType = {
   repositories: GitHubRepo[];
-  addRepository: (repository: GitHubRepo) => void;
+  filteredRepositories?: GitHubRepo[];
+  setFilteredRepositories: (repositories: GitHubRepo[]) => void;
   selectedRepository?: GitHubRepo;
   setSelectedRepository: (repository: GitHubRepo) => void;
+  addRepository: (repository: GitHubRepo) => void;
   deleteRepository: () => void;
-  orderRepositories: (e: any) => void;
+  filterRepositories: (text: string) => void;
+  orderRepositories: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  searchText: string;
+  setSearchText: (text: string) => void;
+  isFiltering: boolean;
+  setIsFiltering: (isFiltering: boolean) => void;
 };
 
 export const DashboardContext = React.createContext<DashboardContextType>({
   repositories: [],
-  addRepository: () => console.log('Just for start'),
+  filteredRepositories: [],
+  setFilteredRepositories: () => console.log('setFilteredRepositories'),
   selectedRepository: {
     id: 1,
     full_name: '',
@@ -27,7 +35,13 @@ export const DashboardContext = React.createContext<DashboardContextType>({
     },
     lastCommitAt: '',
   },
-  setSelectedRepository: () => console.log('Just for start'),
-  deleteRepository: () => console.log('Just for start'),
-  orderRepositories: () => console.log('Just for start'),
+  setSelectedRepository: () => console.log('setSelectedRepository'),
+  addRepository: () => console.log('addRepository'),
+  deleteRepository: () => console.log('deleteRepository'),
+  filterRepositories: () => console.log('filterRepositories'),
+  orderRepositories: () => console.log('orderRepositories'),
+  searchText: '',
+  setSearchText: () => console.log('setSearchText'),
+  isFiltering: false,
+  setIsFiltering: () => console.log('setIsFiltering'),
 });
