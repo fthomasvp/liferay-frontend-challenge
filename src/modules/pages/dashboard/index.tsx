@@ -10,6 +10,10 @@ import emptyImage from 'images/empty_state.gif';
 
 const Dashboard = (): JSX.Element => {
   const [repositories, setRepositories] = React.useState<GitHubRepo[]>([]);
+  const [
+    selectedRepository,
+    setSelectedRepository,
+  ] = React.useState<GitHubRepo>();
 
   const addRepository = React.useCallback(
     (repository) => {
@@ -18,8 +22,24 @@ const Dashboard = (): JSX.Element => {
     [repositories]
   );
 
+  const deleteRepository = () => {
+    const newRepositories = repositories.filter(
+      (repo) => repo.id !== selectedRepository?.id
+    );
+
+    setRepositories(newRepositories);
+  };
+
   return (
-    <GitHubContext.Provider value={{ addRepository, repositories }}>
+    <GitHubContext.Provider
+      value={{
+        addRepository,
+        deleteRepository,
+        repositories,
+        selectedRepository,
+        setSelectedRepository,
+      }}
+    >
       <Header />
 
       {repositories.length > 0 ? (

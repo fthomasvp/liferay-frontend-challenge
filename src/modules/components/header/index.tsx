@@ -149,7 +149,7 @@ const Header = (): JSX.Element => {
         </ClayManagementToolbar.Item>
 
         <ClayManagementToolbar.Item>
-          <span className="text-capitalize text-secondary font-weight-semibold">
+          <span className="text-capitalize text-secondary font-weight-semi-bold">
             Github Compare
           </span>
         </ClayManagementToolbar.Item>
@@ -256,13 +256,13 @@ const Header = (): JSX.Element => {
             disableScroll
             header={
               <>
-                <p className="font-weight-semibold popover-title">
+                <p className="font-weight-semi-bold popover-title">
                   New repository
                 </p>
 
                 <ClayForm.Group className={errorFeedback ? 'has-error' : ''}>
                   <label
-                    className="font-weight-semibold input-label"
+                    className="font-weight-semi-bold input-label"
                     htmlFor="repository"
                   >
                     Repository
