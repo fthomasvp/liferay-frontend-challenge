@@ -4,6 +4,7 @@ import ClayEmptyState from '@clayui/empty-state';
 
 import Header from 'modules/components/header';
 import DynamicDisplay from 'modules/components/dynamic-list-display';
+import { GitHubContext } from 'contexts/github';
 import { GitHubRepo } from 'utils/types';
 import emptyImage from 'images/empty_state.gif';
 
@@ -18,11 +19,11 @@ const Dashboard = (): JSX.Element => {
   );
 
   return (
-    <>
-      <Header addRepository={addRepository} repositories={repositories} />
+    <GitHubContext.Provider value={{ addRepository, repositories }}>
+      <Header />
 
       {repositories.length > 0 ? (
-        <DynamicDisplay repositories={repositories} />
+        <DynamicDisplay />
       ) : (
         <ClayEmptyState
           description="Add some repositories by clicking add new repository"
@@ -34,7 +35,7 @@ const Dashboard = (): JSX.Element => {
           title="There is still nothing here"
         />
       )}
-    </>
+    </GitHubContext.Provider>
   );
 };
 

@@ -7,16 +7,14 @@ import { ClayDropDownWithItems } from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
 import ClayPopover from '@clayui/popover';
 
+import { GitHubContext } from 'contexts/github';
 import { GitHubRepo } from 'utils/types';
 import githubIcon from 'images/icons/github.svg';
 import './styles.css';
 
-type Props = {
-  addRepository: (repository: GitHubRepo) => void;
-  repositories: GitHubRepo[];
-};
+const Header = (): JSX.Element => {
+  const { addRepository, repositories } = React.useContext(GitHubContext);
 
-const Header = ({ addRepository, repositories }: Props): JSX.Element => {
   const filterItems = [
     { label: 'stargazers_count', onClick: () => alert('Filter clicked') },
     { label: 'forks_count', onClick: () => alert('Filter clicked') },
@@ -120,7 +118,7 @@ const Header = ({ addRepository, repositories }: Props): JSX.Element => {
       return;
     }
 
-    // Get `date` from the last commit
+    // Get `date` from the last commit in committer object
     const [lastCommit] = await fetchRepositoryCommits();
 
     if (!lastCommit) {

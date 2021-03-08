@@ -6,14 +6,12 @@ import ClayLayout from '@clayui/layout';
 import ClayLabel from '@clayui/label';
 import { ClayButtonWithIcon } from '@clayui/button';
 
-import { GitHubRepo } from 'utils/types';
+import { GitHubContext } from 'contexts/github';
 import lifeRayLogo from 'images/icons/liferay_logo.svg';
 
-type Props = {
-  repositories: GitHubRepo[];
-};
+const DynamicDisplay = (): JSX.Element => {
+  const { repositories } = React.useContext(GitHubContext);
 
-const DynamicDisplay = ({ repositories }: Props): JSX.Element => {
   return (
     <ClayLayout.ContainerFluid view>
       <ClayLayout.Row>
@@ -134,7 +132,10 @@ const DynamicDisplay = ({ repositories }: Props): JSX.Element => {
                         </ClayCard.Description>
 
                         <ClayCard.Caption>
-                          <ClayLabel data-testid="language" displayType="danger">
+                          <ClayLabel
+                            data-testid="language"
+                            displayType="danger"
+                          >
                             {language}
                           </ClayLabel>
                         </ClayCard.Caption>
