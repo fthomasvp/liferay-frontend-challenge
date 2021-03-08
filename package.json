@@ -1,11 +1,27 @@
 {
   "name": "liferay-frontend-challenge",
   "version": "0.1.0",
-  "private": true,
   "engines": {
     "node": ">=10.x"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fthomasvp/liferay-frontend-challenge"
+  },
+  "private": true,
   "dependencies": {
+    "@clayui/button": "^3.6.0",
+    "@clayui/card": "^3.25.1",
+    "@clayui/css": "^3.25.1",
+    "@clayui/drop-down": "^3.25.1",
+    "@clayui/empty-state": "^3.2.0",
+    "@clayui/form": "^3.14.4",
+    "@clayui/icon": "^3.1.0",
+    "@clayui/label": "^3.4.1",
+    "@clayui/layout": "^3.3.0",
+    "@clayui/management-toolbar": "^3.3.0",
+    "@clayui/panel": "^3.25.0",
+    "@clayui/popover": "^3.5.5",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -13,13 +29,16 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "date-fns": "^2.19.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "eslint": "^7.21.0",
@@ -29,10 +48,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --updateSnapshot",
+    "test:coverage": "react-scripts test --coverage --updateSnapshot",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"src/**/*.ts*\"",
-    "lint": "eslint --fix \"{src,apps,libs,test}/**/*.ts*\""
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "lint": "eslint --fix \"{src,apps,libs,test}/**/*.{ts,tsx}\""
   },
   "eslintConfig": {
     "extends": [
