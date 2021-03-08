@@ -101,7 +101,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         Stars
                          
                         <span
-                          style="font-weight: 400;"
+                          class="font-weight-normal"
                         >
                           156
                         </span>
@@ -122,7 +122,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         Forks
                          
                         <span
-                          style="font-weight: 400;"
+                          class="font-weight-normal"
                         >
                           185
                         </span>
@@ -143,7 +143,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         Open issues
                          
                         <span
-                          style="font-weight: 400;"
+                          class="font-weight-normal"
                         >
                           55
                         </span>
@@ -164,7 +164,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         Age
                          
                         <span
-                          style="font-weight: 400;"
+                          class="font-weight-normal"
                         >
                           over 6 years ago
                         </span>
@@ -185,7 +185,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         Last commit
                          
                         <span
-                          style="font-weight: 400;"
+                          class="font-weight-normal"
                         >
                           3 days ago
                         </span>
@@ -206,7 +206,7 @@ exports[`<DynamicListDisplay /> should render correctly 1`] = `
                         License
                          
                         <span
-                          style="font-weight: 400;"
+                          class="font-weight-normal"
                         >
                           Other
                         </span>

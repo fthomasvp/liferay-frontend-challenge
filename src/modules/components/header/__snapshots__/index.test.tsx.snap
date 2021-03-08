@@ -24,7 +24,7 @@ exports[`<Header /> should render correctly 1`] = `
           class="nav-item"
         >
           <span
-            class="text-capitalize text-secondary font-weight-semibold"
+            class="text-capitalize text-secondary font-weight-semi-bold"
           >
             Github Compare
           </span>
