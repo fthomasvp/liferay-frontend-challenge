@@ -7,35 +7,32 @@ import { ClayDropDownWithItems } from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
 import ClayPopover from '@clayui/popover';
 
-import { GitHubContext } from 'contexts/github';
+import { DashboardContext } from 'contexts/dashboard';
 import { GitHubRepo } from 'utils/types';
 import githubIcon from 'images/icons/github.svg';
 import './styles.css';
 
 const Header = (): JSX.Element => {
-  const { addRepository, repositories } = React.useContext(GitHubContext);
-
-  const filterItems = [
-    { label: 'stargazers_count', onClick: () => alert('Filter clicked') },
-    { label: 'forks_count', onClick: () => alert('Filter clicked') },
-  ];
+  const { addRepository, orderRepositories, repositories } = React.useContext(
+    DashboardContext
+  );
 
   const viewTypes = [
     {
       active: true,
       label: 'Card',
       onClick: () => alert('Show view card'),
-      symbol: 'cards2',
+      symbolLeft: 'cards2',
     },
     {
       label: 'List',
       onClick: () => alert('Show view list'),
-      symbol: 'list',
+      symbolLeft: 'list',
     },
     {
       label: 'Table',
       onClick: () => alert('Show view table'),
-      symbol: 'table',
+      symbolLeft: 'table',
     },
   ];
 
@@ -156,7 +153,39 @@ const Header = (): JSX.Element => {
 
         <ClayManagementToolbar.Item>
           <ClayDropDownWithItems
-            items={filterItems}
+            items={[
+              {
+                label: 'ORDER BY',
+                type: 'group',
+                items: [
+                  {
+                    label: 'Stars',
+                    name: 'stargazers_count',
+                    onClick: orderRepositories,
+                  },
+                  {
+                    label: 'Forks',
+                    name: 'forks_count',
+                    onClick: orderRepositories,
+                  },
+                  {
+                    label: 'Open issues',
+                    name: 'open_issues_count',
+                    onClick: orderRepositories,
+                  },
+                  {
+                    label: 'Age',
+                    name: 'created_at',
+                    onClick: orderRepositories,
+                  },
+                  {
+                    label: 'Last commit',
+                    name: 'lastCommitAt',
+                    onClick: orderRepositories,
+                  },
+                ],
+              },
+            ]}
             trigger={
               <ClayButton className="nav-link" displayType="unstyled">
                 <span className="navbar-breakpoint-down-d-none">
@@ -203,7 +232,7 @@ const Header = (): JSX.Element => {
       </ClayManagementToolbar.Search>
 
       <ClayManagementToolbar.ItemList>
-        {/* Display only on small resolution */}
+        {/* For small resolution */}
         <ClayManagementToolbar.Item className="navbar-breakpoint-d-none">
           <ClayButton
             className="nav-link nav-link-monospaced"
@@ -243,7 +272,7 @@ const Header = (): JSX.Element => {
                 displayType="unstyled"
               >
                 <ClayIcon
-                  symbol={viewTypeActive ? viewTypeActive.symbol : ''}
+                  symbol={viewTypeActive ? viewTypeActive.symbolLeft : ''}
                 />
               </ClayButton>
             }

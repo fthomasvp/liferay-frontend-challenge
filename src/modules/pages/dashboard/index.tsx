@@ -1,10 +1,11 @@
 import React from 'react';
+import _orderBy from 'lodash.orderby';
 
 import ClayEmptyState from '@clayui/empty-state';
 
 import Header from 'modules/components/header';
 import DynamicDisplay from 'modules/components/dynamic-list-display';
-import { GitHubContext } from 'contexts/github';
+import { DashboardContext } from 'contexts/dashboard';
 import { GitHubRepo } from 'utils/types';
 import emptyImage from 'images/empty_state.gif';
 
@@ -30,14 +31,23 @@ const Dashboard = (): JSX.Element => {
     setRepositories(newRepositories);
   };
 
+  const orderRepositories = (e: any) => {
+    const { name: fieldToSort } = e.target;
+
+    setRepositories(
+      _orderBy(repositories, [fieldToSort], ['desc']) as GitHubRepo[]
+    );
+  };
+
   return (
-    <GitHubContext.Provider
+    <DashboardContext.Provider
       value={{
         addRepository,
         deleteRepository,
         repositories,
         selectedRepository,
         setSelectedRepository,
+        orderRepositories,
       }}
     >
       <Header />
@@ -55,7 +65,7 @@ const Dashboard = (): JSX.Element => {
           title="There is still nothing here"
         />
       )}
-    </GitHubContext.Provider>
+    </DashboardContext.Provider>
   );
 };
 
