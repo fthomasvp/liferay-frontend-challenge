@@ -1,13 +1,10 @@
 import React from 'react';
 import _orderBy from 'lodash.orderby';
 
-import ClayEmptyState from '@clayui/empty-state';
-
 import Header from 'modules/components/header';
 import DynamicDisplay from 'modules/components/dynamic-list-display';
 import { DashboardContext } from 'contexts/dashboard';
 import { GitHubRepo } from 'utils/types';
-import emptyImage from 'images/empty_state.gif';
 
 const Dashboard = (): JSX.Element => {
   const [repositories, setRepositories] = React.useState<GitHubRepo[]>([]);
@@ -15,10 +12,17 @@ const Dashboard = (): JSX.Element => {
     selectedRepository,
     setSelectedRepository,
   ] = React.useState<GitHubRepo>();
+  const [filteredRepositories, setFilteredRepositories] = React.useState<
+    GitHubRepo[]
+  >([]);
+  const [searchText, setSearchText] = React.useState('');
+  const [isFiltering, setIsFiltering] = React.useState(false);
 
   const addRepository = React.useCallback(
     (repository) => {
-      setRepositories([repository, ...repositories]);
+      const newRepositories = [repository, ...repositories];
+
+      setRepositories(newRepositories);
     },
     [repositories]
   );
@@ -31,40 +35,52 @@ const Dashboard = (): JSX.Element => {
     setRepositories(newRepositories);
   };
 
-  const orderRepositories = (e: any) => {
-    const { name: fieldToSort } = e.target;
+  const orderRepositories = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const fieldToSort = (e.target as HTMLButtonElement).name;
 
     setRepositories(
       _orderBy(repositories, [fieldToSort], ['desc']) as GitHubRepo[]
     );
   };
 
+  const filterRepositories = (text: string) => {
+    if (repositories.length > 0) {
+      const newFilteredRepositories = repositories.filter((repo) => {
+        if (!text) {
+          return false;
+        }
+
+        return repo.full_name.includes(text);
+      });
+
+      setFilteredRepositories(newFilteredRepositories);
+    }
+  };
+
   return (
     <DashboardContext.Provider
       value={{
-        addRepository,
-        deleteRepository,
         repositories,
+        filteredRepositories,
+        setFilteredRepositories,
         selectedRepository,
         setSelectedRepository,
+        addRepository,
+        deleteRepository,
+        filterRepositories,
         orderRepositories,
+        searchText,
+        setSearchText,
+        isFiltering,
+        setIsFiltering,
       }}
     >
       <Header />
 
-      {repositories.length > 0 ? (
-        <DynamicDisplay />
-      ) : (
-        <ClayEmptyState
-          description="Add some repositories by clicking add new repository"
-          imgProps={{
-            alt: 'satellite up and down',
-            title: 'waiting for a repository',
-          }}
-          imgSrc={emptyImage}
-          title="There is still nothing here"
-        />
-      )}
+      <DynamicDisplay
+        isFilteredItems={isFiltering}
+        items={isFiltering ? filteredRepositories : repositories}
+      />
     </DashboardContext.Provider>
   );
 };
