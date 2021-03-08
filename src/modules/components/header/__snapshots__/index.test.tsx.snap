@@ -90,9 +90,10 @@ exports[`<Header /> should render correctly 1`] = `
               >
                 <input
                   aria-label="Search"
-                  class="form-control form-control input-group-inset input-group-inset-after"
+                  class="form-control input-group-inset input-group-inset-after"
                   placeholder="e.g. liferay/clay"
                   type="text"
+                  value=""
                 />
                 <span
                   class="input-group-inset-item input-group-inset-item-after"
@@ -112,7 +113,7 @@ exports[`<Header /> should render correctly 1`] = `
                   </button>
                   <button
                     class="btn btn-monospaced btn-unstyled"
-                    type="submit"
+                    type="button"
                   >
                     <svg
                       class="lexicon-icon lexicon-icon-search"
