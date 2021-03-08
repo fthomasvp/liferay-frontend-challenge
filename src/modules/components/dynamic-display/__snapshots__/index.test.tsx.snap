@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DynamicListDisplay /> should render correctly 1`] = `
+exports[`<DynamicDisplay /> should render correctly 1`] = `
 <div>
   <div
     class="container-fluid container-view container-fluid-max-xl"

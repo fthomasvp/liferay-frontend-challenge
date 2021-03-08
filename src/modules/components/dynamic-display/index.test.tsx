@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 
-import DynamicListDisplay from './index';
+import DynamicDisplay from './index';
 import { DashboardContext } from 'contexts/dashboard';
 import { GitHubRepo } from 'utils/types';
 
-describe('<DynamicListDisplay />', () => {
+describe('<DynamicDisplay />', () => {
   afterEach(cleanup);
 
   const repositories: GitHubRepo[] = [
@@ -27,13 +27,28 @@ describe('<DynamicListDisplay />', () => {
 
   const props = {
     repositories,
+    filteredRepositories: [],
+    setFilteredRepositories: jest.fn(),
+    selectedRepository: repositories[0],
+    setSelectedRepository: jest.fn(),
     addRepository,
+    deleteRepository: jest.fn(),
+    filterRepositories: jest.fn(),
+    orderRepositories: jest.fn(),
+    searchText: '',
+    setSearchText: jest.fn(),
+    isFiltering: false,
+    setIsFiltering: jest.fn(),
+  };
+
+  const dynamicDisplayProps = {
+    items: repositories,
   };
 
   test('should render correctly', () => {
     const { container } = render(
       <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(container).toMatchSnapshot();
@@ -42,7 +57,7 @@ describe('<DynamicListDisplay />', () => {
   test('should display repository full name on card', () => {
     const { getByTestId } = render(
       <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(getByTestId('fullName')).toHaveTextContent('liferay/clay');
@@ -51,7 +66,7 @@ describe('<DynamicListDisplay />', () => {
   test('should display repository stars count on card', () => {
     const { getByTestId } = render(
       <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(getByTestId('stargazersCount')).toHaveTextContent('Stars 156');
@@ -60,7 +75,7 @@ describe('<DynamicListDisplay />', () => {
   test('should display repository forks count on card', () => {
     const { getByTestId } = render(
       <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(getByTestId('forksCount')).toHaveTextContent('Forks 185');
@@ -69,7 +84,7 @@ describe('<DynamicListDisplay />', () => {
   test('should display repository open issues count on card', () => {
     const { getByTestId } = render(
       <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(getByTestId('openIssues')).toHaveTextContent('Open issues 55');
@@ -78,7 +93,7 @@ describe('<DynamicListDisplay />', () => {
   test('should display repository age on card', () => {
     const { getByTestId } = render(
       <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(getByTestId('age')).toBeInTheDocument();
@@ -87,7 +102,7 @@ describe('<DynamicListDisplay />', () => {
   test('should display repository last commit on card', () => {
     const { getByTestId } = render(
       <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(getByTestId('lastCommitAt')).not.toHaveTextContent('No commits yet');
@@ -98,14 +113,14 @@ describe('<DynamicListDisplay />', () => {
 
     repository.lastCommitAt = null;
 
-    const props = {
+    const updatedProps = {
+      ...props,
       repositories: [repository],
-      addRepository,
     };
 
     const { getByTestId } = render(
-      <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+      <DashboardContext.Provider value={updatedProps}>
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(getByTestId('lastCommitAt')).toHaveTextContent('No commits yet');
@@ -114,7 +129,7 @@ describe('<DynamicListDisplay />', () => {
   test('should display repository license name on card', () => {
     const { getByTestId } = render(
       <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(getByTestId('license')).toHaveTextContent('License Other');
@@ -125,14 +140,14 @@ describe('<DynamicListDisplay />', () => {
 
     repository.license = null;
 
-    const props = {
+    const updatedProps = {
+      ...props,
       repositories: [repository],
-      addRepository,
     };
 
     const { getByTestId } = render(
-      <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+      <DashboardContext.Provider value={updatedProps}>
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(getByTestId('license')).toHaveTextContent('License N/A');
@@ -141,7 +156,7 @@ describe('<DynamicListDisplay />', () => {
   test('should display repository language label on card', () => {
     const { getByTestId } = render(
       <DashboardContext.Provider value={props}>
-        <DynamicListDisplay />
+        <DynamicDisplay {...dynamicDisplayProps} />
       </DashboardContext.Provider>
     );
     expect(getByTestId('language')).toHaveTextContent('HTML');

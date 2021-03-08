@@ -2,7 +2,7 @@ import React from 'react';
 import _orderBy from 'lodash.orderby';
 
 import Header from 'modules/components/header';
-import DynamicDisplay from 'modules/components/dynamic-list-display';
+import DynamicDisplay from 'modules/components/dynamic-display';
 import { DashboardContext } from 'contexts/dashboard';
 import { GitHubRepo } from 'utils/types';
 
