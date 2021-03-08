@@ -134,9 +134,7 @@ const Header = ({ addRepository, repositories }: Props): JSX.Element => {
 
     addRepository(repository);
 
-    setShowPopover(false);
-    setRepositoryToSearch('');
-    setErrorFeedback('');
+    onClosePopover();
   };
 
   const onKeyPressRepositoryToSearch = (e: React.KeyboardEvent) => {
@@ -256,6 +254,7 @@ const Header = ({ addRepository, repositories }: Props): JSX.Element => {
 
         <ClayManagementToolbar.Item style={{ marginLeft: '24px' }}>
           <ClayPopover
+            data-testid="popover"
             disableScroll
             header={
               <>
@@ -277,6 +276,7 @@ const Header = ({ addRepository, repositories }: Props): JSX.Element => {
                     </span>
                   </label>
                   <ClayInput
+                    data-testid="repositoryTextInput"
                     id="repository"
                     onChange={onChangeRepositoryToSearch}
                     onKeyPress={onKeyPressRepositoryToSearch}
@@ -297,10 +297,18 @@ const Header = ({ addRepository, repositories }: Props): JSX.Element => {
             alignPosition="bottom-right"
             show={showPopover}
             trigger={
-              <ClayButtonWithIcon aria-label="Add button" symbol="plus" />
+              <ClayButtonWithIcon
+                data-testid="addButtonToolbarManagement"
+                aria-label="Add button"
+                symbol="plus"
+              />
             }
           >
-            <ClayButton.Group className="d-flex justify-content-end" spaced>
+            <ClayButton.Group
+              data-testid="popoverButtonActions"
+              className="d-flex justify-content-end"
+              spaced
+            >
               <ClayButton displayType="secondary" onClick={onClosePopover}>
                 Cancel
               </ClayButton>
