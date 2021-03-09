@@ -187,7 +187,7 @@ exports[`<DynamicDisplay /> should render correctly 1`] = `
                         <span
                           class="font-weight-normal"
                         >
-                          3 days ago
+                          4 days ago
                         </span>
                       </span>
                     </span>
