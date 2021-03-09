@@ -201,7 +201,7 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                                 data-testid="language"
                                 displayType="danger"
                               >
-                                {language}
+                                {language || 'N/A'}
                               </ClayLabel>
                             </ClayCard.Caption>
                           </section>
