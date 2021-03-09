@@ -158,7 +158,7 @@ const Header = (): JSX.Element => {
   }, [isFiltering]);
 
   return (
-    <ClayManagementToolbar>
+    <ClayManagementToolbar data-testid="managementToolbar">
       <ClayManagementToolbar.ItemList>
         <ClayManagementToolbar.Item style={{ marginRight: '28px' }}>
           <img src={githubIcon} alt="github logo" />
