@@ -35,8 +35,6 @@ describe('<DynamicDisplay />', () => {
     deleteRepository: jest.fn(),
     filterRepositories: jest.fn(),
     orderRepositories: jest.fn(),
-    searchText: '',
-    setSearchText: jest.fn(),
     isFiltering: false,
     setIsFiltering: jest.fn(),
     favorRepository: jest.fn(),

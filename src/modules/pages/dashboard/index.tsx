@@ -15,7 +15,6 @@ const Dashboard = (): JSX.Element => {
   const [filteredRepositories, setFilteredRepositories] = React.useState<
     GitHubRepo[]
   >([]);
-  const [searchText, setSearchText] = React.useState('');
   const [isFiltering, setIsFiltering] = React.useState(false);
   const [starIcon, setStarIcon] = React.useState(true);
 
@@ -118,8 +117,6 @@ const Dashboard = (): JSX.Element => {
         deleteRepository,
         filterRepositories,
         orderRepositories,
-        searchText,
-        setSearchText,
         isFiltering,
         setIsFiltering,
         favorRepository,

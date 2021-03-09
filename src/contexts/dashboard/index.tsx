@@ -15,8 +15,6 @@ type DashboardContextType = {
   favorRepository: (repository: GitHubRepo) => void;
   filterRepositories: (filter: Filter) => void;
   orderRepositories: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  searchText: string;
-  setSearchText: React.Dispatch<React.SetStateAction<string>>;
   isFiltering: boolean;
   setIsFiltering: React.Dispatch<React.SetStateAction<boolean>>;
   starIcon: boolean;
@@ -46,8 +44,6 @@ export const DashboardContext = React.createContext<DashboardContextType>({
   deleteRepository: () => null,
   filterRepositories: () => null,
   orderRepositories: () => null,
-  searchText: '',
-  setSearchText: () => null,
   isFiltering: false,
   setIsFiltering: () => null,
   favorRepository: () => null,

@@ -22,7 +22,6 @@ const DynamicDisplay = (props: Props): JSX.Element => {
   const {
     setSelectedRepository,
     setFilteredRepositories,
-    setSearchText,
     setIsFiltering,
     favorRepository,
     setStarIcon,
@@ -229,7 +228,6 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                   displayType="secondary"
                   onClick={() => {
                     setFilteredRepositories([]);
-                    setSearchText('');
                     setStarIcon(true);
                     setIsFiltering(false);
                   }}

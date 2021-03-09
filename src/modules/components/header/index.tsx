@@ -18,8 +18,7 @@ const Header = (): JSX.Element => {
     addRepository,
     filterRepositories,
     orderRepositories,
-    searchText,
-    setSearchText,
+    isFiltering,
     setIsFiltering,
     starIcon,
     setStarIcon,
@@ -38,6 +37,7 @@ const Header = (): JSX.Element => {
   const [showPopover, setShowPopover] = React.useState(false);
   const [repositoryToFetch, setRepositoryToFetch] = React.useState('');
   const [errorFeedback, setErrorFeedback] = React.useState('');
+  const [searchText, setSearchText] = React.useState('');
 
   const viewTypeActive = viewTypes.find((type) => type.active);
 
@@ -149,6 +149,13 @@ const Header = (): JSX.Element => {
       }
     }
   }, [showPopover]);
+
+  // Clear search text on toolbar after remove filters
+  React.useEffect(() => {
+    if (!isFiltering) {
+      setSearchText('');
+    }
+  }, [isFiltering]);
 
   return (
     <ClayManagementToolbar>
