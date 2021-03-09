@@ -21,6 +21,7 @@ describe('<DynamicDisplay />', () => {
         name: 'Other',
       },
       lastCommitAt: '2021-03-05T12:23:22Z',
+      isFavored: false,
     },
   ];
   const addRepository = jest.fn();
@@ -39,6 +40,9 @@ describe('<DynamicDisplay />', () => {
     setSearchText: jest.fn(),
     isFiltering: false,
     setIsFiltering: jest.fn(),
+    favorRepository: jest.fn(),
+    starIcon: true,
+    setStarIcon: jest.fn(),
   };
 
   const dynamicDisplayProps = {

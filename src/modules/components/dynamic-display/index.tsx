@@ -24,6 +24,8 @@ const DynamicDisplay = (props: Props): JSX.Element => {
     setFilteredRepositories,
     setSearchText,
     setIsFiltering,
+    favorRepository,
+    setStarIcon,
   } = React.useContext(DashboardContext);
 
   const { items, isFilteredItems } = props;
@@ -46,6 +48,7 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                 lastCommitAt,
                 license,
                 language,
+                isFavored,
               }) => (
                 <div key={id} className="col-md-4">
                   <ClayCard>
@@ -70,7 +73,23 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                       <ClayButtonWithIcon
                         aria-label="Star"
                         displayType="unstyled"
-                        symbol="star-o"
+                        onClick={() => {
+                          const repository = {
+                            id,
+                            full_name,
+                            stargazers_count,
+                            forks_count,
+                            open_issues_count,
+                            created_at,
+                            lastCommitAt,
+                            license,
+                            language,
+                            isFavored,
+                          };
+
+                          favorRepository(repository);
+                        }}
+                        symbol={isFavored ? 'star' : 'star-o'}
                       />
 
                       <ClayButtonWithIcon
@@ -89,6 +108,7 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                             lastCommitAt,
                             license,
                             language,
+                            isFavored,
                           };
 
                           setSelectedRepository(repository);
@@ -209,6 +229,7 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                   onClick={() => {
                     setFilteredRepositories([]);
                     setSearchText('');
+                    setStarIcon(true);
                     setIsFiltering(false);
                   }}
                 >

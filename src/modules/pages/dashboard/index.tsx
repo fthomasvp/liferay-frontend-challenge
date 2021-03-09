@@ -4,7 +4,7 @@ import _orderBy from 'lodash.orderby';
 import Header from 'modules/components/header';
 import DynamicDisplay from 'modules/components/dynamic-display';
 import { DashboardContext } from 'contexts/dashboard';
-import { GitHubRepo } from 'utils/types';
+import { Filter, GitHubRepo } from 'utils/types';
 
 const Dashboard = (): JSX.Element => {
   const [repositories, setRepositories] = React.useState<GitHubRepo[]>([]);
@@ -17,6 +17,7 @@ const Dashboard = (): JSX.Element => {
   >([]);
   const [searchText, setSearchText] = React.useState('');
   const [isFiltering, setIsFiltering] = React.useState(false);
+  const [starIcon, setStarIcon] = React.useState(true);
 
   const addRepository = React.useCallback(
     (repository) => {
@@ -28,6 +29,14 @@ const Dashboard = (): JSX.Element => {
   );
 
   const deleteRepository = () => {
+    if (isFiltering) {
+      const newRepositories = filteredRepositories.filter(
+        (repo) => repo.id !== selectedRepository?.id
+      );
+
+      setFilteredRepositories(newRepositories);
+    }
+
     const newRepositories = repositories.filter(
       (repo) => repo.id !== selectedRepository?.id
     );
@@ -38,23 +47,63 @@ const Dashboard = (): JSX.Element => {
   const orderRepositories = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const fieldToSort = (e.target as HTMLButtonElement).name;
 
+    if (isFiltering) {
+      setFilteredRepositories(
+        _orderBy(filteredRepositories, [fieldToSort], ['desc']) as GitHubRepo[]
+      );
+    }
+
     setRepositories(
       _orderBy(repositories, [fieldToSort], ['desc']) as GitHubRepo[]
     );
   };
 
-  const filterRepositories = (text: string) => {
+  const filterRepositories = (filter: Filter) => {
     if (repositories.length > 0) {
-      const newFilteredRepositories = repositories.filter((repo) => {
-        if (!text) {
-          return false;
-        }
+      let newFilteredRepositories: GitHubRepo[] = [];
 
-        return repo.full_name.includes(text);
-      });
+      if (filter?.repositoryName) {
+        newFilteredRepositories = repositories.filter((repo) => {
+          if (!filter.repositoryName) {
+            return false;
+          }
+
+          return repo.full_name.match(new RegExp(filter.repositoryName, 'i'));
+        });
+      }
+
+      if (filter?.isFavored) {
+        newFilteredRepositories = repositories.filter(
+          (repo) => repo.isFavored === filter.isFavored
+        );
+      }
 
       setFilteredRepositories(newFilteredRepositories);
     }
+  };
+
+  const favorRepository = (repository: GitHubRepo) => {
+    if (isFiltering) {
+      const newRepositories = filteredRepositories.map((repo) => {
+        if (repo.id === repository?.id) {
+          repo.isFavored = !repository.isFavored;
+        }
+
+        return repo;
+      });
+
+      setFilteredRepositories(newRepositories);
+    }
+
+    const newRepositories = repositories.map((repo) => {
+      if (repo.id === repository?.id) {
+        repo.isFavored = !repository.isFavored;
+      }
+
+      return repo;
+    });
+
+    setRepositories(newRepositories);
   };
 
   return (
@@ -73,6 +122,9 @@ const Dashboard = (): JSX.Element => {
         setSearchText,
         isFiltering,
         setIsFiltering,
+        favorRepository,
+        starIcon,
+        setStarIcon,
       }}
     >
       <Header />

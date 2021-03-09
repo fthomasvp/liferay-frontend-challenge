@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GitHubRepo } from 'utils/types';
+import { GitHubRepo, Filter } from 'utils/types';
 
 type DashboardContextType = {
   repositories: GitHubRepo[];
@@ -10,18 +10,21 @@ type DashboardContextType = {
   setSelectedRepository: (repository: GitHubRepo) => void;
   addRepository: (repository: GitHubRepo) => void;
   deleteRepository: () => void;
-  filterRepositories: (text: string) => void;
+  filterRepositories: (filter: Filter) => void;
   orderRepositories: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   searchText: string;
   setSearchText: (text: string) => void;
   isFiltering: boolean;
   setIsFiltering: (isFiltering: boolean) => void;
+  favorRepository: (repository: GitHubRepo) => void;
+  starIcon: boolean;
+  setStarIcon: (hasStarIcon: any) => void;
 };
 
 export const DashboardContext = React.createContext<DashboardContextType>({
   repositories: [],
   filteredRepositories: [],
-  setFilteredRepositories: () => console.log('setFilteredRepositories'),
+  setFilteredRepositories: () => null,
   selectedRepository: {
     id: 1,
     full_name: '',
@@ -34,14 +37,18 @@ export const DashboardContext = React.createContext<DashboardContextType>({
       name: '',
     },
     lastCommitAt: '',
+    isFavored: false,
   },
-  setSelectedRepository: () => console.log('setSelectedRepository'),
-  addRepository: () => console.log('addRepository'),
-  deleteRepository: () => console.log('deleteRepository'),
-  filterRepositories: () => console.log('filterRepositories'),
-  orderRepositories: () => console.log('orderRepositories'),
+  setSelectedRepository: () => null,
+  addRepository: () => null,
+  deleteRepository: () => null,
+  filterRepositories: () => null,
+  orderRepositories: () => null,
   searchText: '',
-  setSearchText: () => console.log('setSearchText'),
+  setSearchText: () => null,
   isFiltering: false,
-  setIsFiltering: () => console.log('setIsFiltering'),
+  setIsFiltering: () => null,
+  favorRepository: () => null,
+  starIcon: true,
+  setStarIcon: () => null,
 });
