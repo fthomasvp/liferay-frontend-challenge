@@ -1,46 +1,73 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Liferay Frontend Challenge
 
-## Available Scripts
+MVP for gather data from GitHub API and display insightful information about a given GitHub repository.
 
-In the project directory, you can run:
+## Installation
 
-### `yarn start`
+You should have these tools to run the application:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+|Tool| Version |
+|--|--|
+| [Node.js](https://nodejs.org/en/download/) | >= 10.x |
+| [Yarn](https://classic.yarnpkg.com/en/docs/install/) | >= 1.x |
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+> This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### `yarn test`
+In the terminal of your preference, *on the project root directory*, run **Yarn** to install the dependencies.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+yarn install
+```
 
-### `yarn build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The project contains five main features.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To run the application, run the following command on the project root directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+yarn start
+```
 
-### `yarn eject`
+### Add a new repository
+![add repository](https://drive.google.com/uc?export=view&id=1iHVD0h2LQR4tQVKkRKU7eo__UtZ3auK9 "Adding a repository")
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To add a repository, you will need to type the *username/project_name* or *organization/project_name*. For example:
+> liferay/clay
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Ensure that the repository is public, otherwise you'll get a feedback message like this:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![danger feedback on text input](https://drive.google.com/uc?export=view&id=1c1o_jpziTLCFH5oHgUPFw2YXtx4ntFUA "showing danger input feedback")
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Delete an existing repository
+![delete repository](https://drive.google.com/uc?export=view&id=1wuzsGvl6-8HnTd-Y3xH9i5HmEGOK1HBC "Deleting a repository")
 
-## Learn More
+If you want to remove a repository from the list, you just need to click on the trash icon inside the repository card.
+A modal should appear, with the name of the repository, asking you to confirm the deletion.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Order by repository property
+![order repositories](https://drive.google.com/uc?export=view&id=1RuhZfDwRbk0ADfFjv3eVYYnaJUE0Jixm "ordering repositories")
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The available properties to sorting - by *descending* order - are:
+- *Stars*
+- *Forks*
+- *Open issues*
+- *Age*
+- *Last commit*
+
+### Filter by existing repository
+![filter repositories](https://drive.google.com/uc?export=view&id=10XqDSM3eNTik-1-CWMroZsd0jBqRQhTh "filtering repositories by full name")
+
+If you want to filter for specific repositories from your list, just type on the search input and press "Enter" or click on the search icon.
+
+If no results were found, you can clear the filter and see your repositories again!
+
+### Favorite repository
+![favor a repository](https://drive.google.com/uc?export=view&id=1g9HAVbYeywj57e1ZVb_XauhFjC9FGRy- "favoring a repository")
+
+If you want to quickly find repositories in your list, just click on the star icon inside the repository's card and filter them by clicking on the star icon on the toolbar.
+
+## License
+
+Unlicensed.
