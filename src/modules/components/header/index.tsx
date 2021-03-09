@@ -28,19 +28,9 @@ const Header = (): JSX.Element => {
   const viewTypes = [
     {
       active: true,
+      disabled: true,
       label: 'Card',
-      onClick: () => alert('Show view card'),
       symbolLeft: 'cards2',
-    },
-    {
-      label: 'List',
-      onClick: () => alert('Show view list'),
-      symbolLeft: 'list',
-    },
-    {
-      label: 'Table',
-      onClick: () => alert('Show view table'),
-      symbolLeft: 'table',
     },
   ];
 
