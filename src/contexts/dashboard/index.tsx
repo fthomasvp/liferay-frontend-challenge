@@ -5,20 +5,22 @@ import { GitHubRepo, Filter } from 'utils/types';
 type DashboardContextType = {
   repositories: GitHubRepo[];
   filteredRepositories?: GitHubRepo[];
-  setFilteredRepositories: (repositories: GitHubRepo[]) => void;
+  setFilteredRepositories: React.Dispatch<React.SetStateAction<GitHubRepo[]>>;
   selectedRepository?: GitHubRepo;
-  setSelectedRepository: (repository: GitHubRepo) => void;
+  setSelectedRepository: React.Dispatch<
+    React.SetStateAction<GitHubRepo | undefined>
+  >;
   addRepository: (repository: GitHubRepo) => void;
   deleteRepository: () => void;
+  favorRepository: (repository: GitHubRepo) => void;
   filterRepositories: (filter: Filter) => void;
   orderRepositories: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   searchText: string;
-  setSearchText: (text: string) => void;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
   isFiltering: boolean;
-  setIsFiltering: (isFiltering: boolean) => void;
-  favorRepository: (repository: GitHubRepo) => void;
+  setIsFiltering: React.Dispatch<React.SetStateAction<boolean>>;
   starIcon: boolean;
-  setStarIcon: (hasStarIcon: any) => void;
+  setStarIcon: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const DashboardContext = React.createContext<DashboardContextType>({

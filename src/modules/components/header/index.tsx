@@ -283,7 +283,7 @@ const Header = (): JSX.Element => {
                 isFavored: starIcon,
               });
 
-              setStarIcon((prevState: any) => !prevState);
+              setStarIcon((prevState) => !prevState);
             }}
           >
             <ClayIcon symbol={starIcon ? 'star-o' : 'star'} />
