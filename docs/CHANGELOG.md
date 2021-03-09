@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/fthomasvp/liferay-frontend-challenge/compare/v1.0.0...v1.0.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* dashboard unnecessary rerender from search input ([c1784bb](https://github.com/fthomasvp/liferay-frontend-challenge/commit/c1784bbda3b8be6f10ed6562aca368568acc981c))
+
 # 1.0.0 (2021-03-09)
 
 
