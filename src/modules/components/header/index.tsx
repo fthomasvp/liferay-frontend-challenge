@@ -21,6 +21,8 @@ const Header = (): JSX.Element => {
     searchText,
     setSearchText,
     setIsFiltering,
+    starIcon,
+    setStarIcon,
   } = React.useContext(DashboardContext);
 
   const viewTypes = [
@@ -125,13 +127,16 @@ const Header = (): JSX.Element => {
     const [lastCommit] = await fetchRepositoryCommits();
 
     if (!lastCommit) {
-      console.warn('The repository does not contains commit');
+      alert('The repository does not contains commits');
       repository.lastCommitAt = null;
     } else {
       const { date } = lastCommit.commit.committer;
 
       repository.lastCommitAt = date;
     }
+
+    // Add `isFavored` property (default is false)
+    repository.isFavored = false;
 
     addRepository(repository);
 
@@ -143,6 +148,17 @@ const Header = (): JSX.Element => {
       onAddRepository();
     }
   };
+
+  // After display the Popover, move focus to text input.
+  React.useEffect(() => {
+    if (showPopover) {
+      const repositoryInput = document.getElementById('repository');
+
+      if (repositoryInput) {
+        repositoryInput.focus();
+      }
+    }
+  }, [showPopover]);
 
   return (
     <ClayManagementToolbar>
@@ -224,7 +240,9 @@ const Header = (): JSX.Element => {
                   e.preventDefault();
 
                   setIsFiltering(true);
-                  filterRepositories(searchText);
+                  filterRepositories({
+                    repositoryName: searchText,
+                  });
                 }
               }}
               type="text"
@@ -241,7 +259,10 @@ const Header = (): JSX.Element => {
                 displayType="unstyled"
                 symbol="search"
                 onClick={() => {
-                  filterRepositories(searchText);
+                  setIsFiltering(true);
+                  filterRepositories({
+                    repositoryName: searchText,
+                  });
                 }}
                 type="button"
               />
@@ -266,9 +287,16 @@ const Header = (): JSX.Element => {
           <ClayButton
             className="nav-link nav-link-monospaced"
             displayType="unstyled"
-            onClick={() => console.log('Star icon clicked')}
+            onClick={() => {
+              setIsFiltering(true);
+              filterRepositories({
+                isFavored: starIcon,
+              });
+
+              setStarIcon((prevState: any) => !prevState);
+            }}
           >
-            <ClayIcon symbol="star-o" />
+            <ClayIcon symbol={starIcon ? 'star-o' : 'star'} />
           </ClayButton>
         </ClayManagementToolbar.Item>
 
@@ -276,7 +304,7 @@ const Header = (): JSX.Element => {
           <ClayButton
             className="nav-link nav-link-monospaced"
             displayType="unstyled"
-            onClick={() => console.log('Adjust icon clicked')}
+            onClick={() => null}
           >
             <ClayIcon symbol="adjust" />
           </ClayButton>
