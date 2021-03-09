@@ -59,6 +59,7 @@ exports[`<DynamicDisplay /> should render correctly 1`] = `
             <button
               aria-label="Trash"
               class="btn btn-monospaced btn-unstyled"
+              data-testid="trashIcon"
               type="button"
             >
               <svg

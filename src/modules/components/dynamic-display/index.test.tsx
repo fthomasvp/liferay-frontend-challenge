@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, waitFor, fireEvent } from '@testing-library/react';
 
 import DynamicDisplay from './index';
 import { DashboardContext } from 'contexts/dashboard';
@@ -24,7 +24,6 @@ describe('<DynamicDisplay />', () => {
       isFavored: false,
     },
   ];
-  const addRepository = jest.fn();
 
   const props = {
     repositories,
@@ -32,7 +31,7 @@ describe('<DynamicDisplay />', () => {
     setFilteredRepositories: jest.fn(),
     selectedRepository: repositories[0],
     setSelectedRepository: jest.fn(),
-    addRepository,
+    addRepository: jest.fn(),
     deleteRepository: jest.fn(),
     filterRepositories: jest.fn(),
     orderRepositories: jest.fn(),
@@ -164,5 +163,22 @@ describe('<DynamicDisplay />', () => {
       </DashboardContext.Provider>
     );
     expect(getByTestId('language')).toHaveTextContent('HTML');
+  });
+
+  test('when click on the trash icon, should display the delete modal', async () => {
+    const { getByTestId, getByText } = render(
+      <DashboardContext.Provider value={props}>
+        <DynamicDisplay {...dynamicDisplayProps} />
+      </DashboardContext.Provider>
+    );
+
+    fireEvent.click(getByTestId('trashIcon'));
+
+    const repositoryFullName = await waitFor(() =>
+      getByTestId('repositoryFullName')
+    );
+    expect(repositoryFullName).toHaveTextContent('liferay/clay');
+    expect(getByText('Delete')).toBeInTheDocument();
+    expect(getByText('Cancel')).toBeInTheDocument();
   });
 });

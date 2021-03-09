@@ -27,7 +27,10 @@ const ModalDelete = ({ visible, setVisible }: Props): JSX.Element => {
           <ClayModal.Body>
             <p style={{ color: '#333' }}>
               Are you sure to delete the{' '}
-              <span className="font-weight-semi-bold">
+              <span
+                data-testid="repositoryFullName"
+                className="font-weight-semi-bold"
+              >
                 {selectedRepository?.full_name}
               </span>{' '}
               repository?

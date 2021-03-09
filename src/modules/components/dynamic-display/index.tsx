@@ -7,10 +7,10 @@ import ClayLabel from '@clayui/label';
 import ClayEmptyState from '@clayui/empty-state';
 import ClayButton, { ClayButtonWithIcon } from '@clayui/button';
 
-import ModalDelete from 'modules/components/modal-delete';
+import ModalDelete from './modal-delete';
 import { DashboardContext } from 'contexts/dashboard';
-import lifeRayLogo from 'images/icons/liferay_logo.svg';
 import { GitHubRepo } from 'utils/types';
+import lifeRayLogo from 'images/icons/liferay_logo.svg';
 import emptyImage from 'images/empty_state.gif';
 
 type Props = {
@@ -93,6 +93,7 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                       />
 
                       <ClayButtonWithIcon
+                        data-testid="trashIcon"
                         aria-label="Trash"
                         displayType="unstyled"
                         onClick={() => {
