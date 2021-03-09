@@ -52,7 +52,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --updateSnapshot",
-    "test:coverage": "react-scripts test --coverage --updateSnapshot",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "lint": "eslint --fix \"{src,apps,libs,test}/**/*.{ts,tsx}\""
