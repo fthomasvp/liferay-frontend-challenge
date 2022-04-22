@@ -2,7 +2,7 @@ import React from 'react';
 import { render, cleanup, waitFor, fireEvent } from '@testing-library/react';
 
 import DynamicDisplay from './index';
-import { DashboardContext } from 'contexts/dashboard';
+import { HomeContext } from 'contexts/home/home.context';
 import { GitHubRepo } from 'utils/types';
 
 describe('<DynamicDisplay />', () => {
@@ -48,63 +48,63 @@ describe('<DynamicDisplay />', () => {
 
   test('should render correctly', () => {
     const { container } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(container).toMatchSnapshot();
   });
 
   test('should display repository full name on card', () => {
     const { getByTestId } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(getByTestId('fullName')).toHaveTextContent('liferay/clay');
   });
 
   test('should display repository stars count on card', () => {
     const { getByTestId } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(getByTestId('stargazersCount')).toHaveTextContent('Stars 156');
   });
 
   test('should display repository forks count on card', () => {
     const { getByTestId } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(getByTestId('forksCount')).toHaveTextContent('Forks 185');
   });
 
   test('should display repository open issues count on card', () => {
     const { getByTestId } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(getByTestId('openIssues')).toHaveTextContent('Open issues 55');
   });
 
   test('should display repository age on card', () => {
     const { getByTestId } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(getByTestId('age')).toBeInTheDocument();
   });
 
   test('should display repository last commit on card', () => {
     const { getByTestId } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(getByTestId('lastCommitAt')).not.toHaveTextContent('No commits yet');
   });
@@ -120,18 +120,18 @@ describe('<DynamicDisplay />', () => {
     };
 
     const { getByTestId } = render(
-      <DashboardContext.Provider value={updatedProps}>
+      <HomeContext.Provider value={updatedProps}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(getByTestId('lastCommitAt')).toHaveTextContent('No commits yet');
   });
 
   test('should display repository license name on card', () => {
     const { getByTestId } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(getByTestId('license')).toHaveTextContent('License Other');
   });
@@ -147,27 +147,27 @@ describe('<DynamicDisplay />', () => {
     };
 
     const { getByTestId } = render(
-      <DashboardContext.Provider value={updatedProps}>
+      <HomeContext.Provider value={updatedProps}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(getByTestId('license')).toHaveTextContent('License N/A');
   });
 
   test('should display repository language label on card', () => {
     const { getByTestId } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(getByTestId('language')).toHaveTextContent('HTML');
   });
 
   test('when click on the trash icon, should display the delete modal', async () => {
     const { getByTestId, getByText } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <DynamicDisplay {...dynamicDisplayProps} />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
 
     fireEvent.click(getByTestId('trashIcon'));

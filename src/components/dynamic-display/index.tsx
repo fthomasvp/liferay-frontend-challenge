@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 
 import ClayCard from '@clayui/card';
@@ -7,29 +7,27 @@ import ClayLabel from '@clayui/label';
 import ClayEmptyState from '@clayui/empty-state';
 import ClayButton, { ClayButtonWithIcon } from '@clayui/button';
 
+import { HomeContext } from 'contexts/home/home.context';
+import { SearchBarContext } from 'contexts/search-bar/search-bar.context';
 import ModalDelete from './modal-delete';
-import { DashboardContext } from 'contexts/dashboard';
-import { GitHubRepo } from 'utils/types';
-import lifeRayLogo from 'images/icons/liferay_logo.svg';
-import emptyImage from 'images/empty_state.gif';
+import liferayLogo from 'assets/icons/liferay_logo.svg';
+import animatedNotFoundIllustration from 'assets/images/animated_not_found_illustration.gif';
 
-type Props = {
-  items: GitHubRepo[];
-  isFilteredItems?: boolean;
-};
-
-const DynamicDisplay = (props: Props): JSX.Element => {
+const DynamicDisplay = (): JSX.Element => {
   const {
+    repositories,
     setSelectedRepository,
-    setFilteredRepositories,
-    setIsFiltering,
-    favorRepository,
+    // favorRepository,
     setStarIcon,
-  } = React.useContext(DashboardContext);
+  } = useContext(HomeContext);
 
-  const { items, isFilteredItems } = props;
+  const { filteredRepos, isFiltering, setIsFiltering } = useContext(
+    SearchBarContext
+  );
 
   const [visible, setVisible] = React.useState(false);
+
+  const items = isFiltering ? filteredRepos : repositories;
 
   return (
     <>
@@ -55,7 +53,7 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                       style={{ height: '50px', alignItems: 'center' }}
                     >
                       <img
-                        src={lifeRayLogo}
+                        src={liferayLogo}
                         alt="Liferay logo"
                         style={{ marginLeft: '6px' }}
                       />
@@ -86,7 +84,7 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                             isFavored,
                           };
 
-                          favorRepository(repository);
+                          // favorRepository(repository);
                         }}
                         symbol={isFavored ? 'star' : 'star-o'}
                       />
@@ -213,7 +211,7 @@ const DynamicDisplay = (props: Props): JSX.Element => {
             )}
         </ClayLayout.Row>
 
-        {isFilteredItems
+        {isFiltering
           ? items.length === 0 && (
               <ClayEmptyState
                 description="No results were found that matched"
@@ -221,13 +219,13 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                   alt: 'satellite up and down',
                   title: 'repository not found',
                 }}
-                imgSrc={emptyImage}
+                imgSrc={animatedNotFoundIllustration}
                 title="Something went wrong!"
               >
                 <ClayButton
                   displayType="secondary"
                   onClick={() => {
-                    setFilteredRepositories([]);
+                    // setFilteredRepositories([]);
                     setStarIcon(true);
                     setIsFiltering(false);
                   }}
@@ -243,7 +241,7 @@ const DynamicDisplay = (props: Props): JSX.Element => {
                   alt: 'satellite up and down',
                   title: 'waiting for a repository',
                 }}
-                imgSrc={emptyImage}
+                imgSrc={animatedNotFoundIllustration}
                 title="There is still nothing here"
               />
             )}

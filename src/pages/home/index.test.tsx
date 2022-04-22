@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 
-import Dashboard from './index';
-import { DashboardContext } from 'contexts/dashboard';
+import Dashboard from './home.page';
+import { HomeContext } from 'contexts/home/home.context';
 import { GitHubRepo } from 'utils/types';
 
 describe('<Dashboard />', () => {
@@ -44,18 +44,18 @@ describe('<Dashboard />', () => {
 
   test('should render correctly', () => {
     const { container } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <Dashboard />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
     expect(container).toMatchSnapshot();
   });
 
   test('should display the Header and an Empty State', async () => {
     const { getByTestId, getByText } = render(
-      <DashboardContext.Provider value={props}>
+      <HomeContext.Provider value={props}>
         <Dashboard />
-      </DashboardContext.Provider>
+      </HomeContext.Provider>
     );
 
     expect(getByTestId('managementToolbar')).toBeInTheDocument();

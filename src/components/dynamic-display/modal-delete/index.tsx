@@ -3,7 +3,7 @@ import React from 'react';
 import ClayButton from '@clayui/button';
 import ClayModal, { useModal } from '@clayui/modal';
 
-import { DashboardContext } from 'contexts/dashboard';
+import { HomeContext } from 'contexts/home/home.context';
 
 type Props = {
   visible: boolean;
@@ -11,8 +11,8 @@ type Props = {
 };
 
 const ModalDelete = ({ visible, setVisible }: Props): JSX.Element => {
-  const { selectedRepository, deleteRepository } = React.useContext(
-    DashboardContext
+  const { selectedRepository /*deleteRepository*/ } = React.useContext(
+    HomeContext
   );
 
   const { observer, onClose } = useModal({
@@ -47,7 +47,7 @@ const ModalDelete = ({ visible, setVisible }: Props): JSX.Element => {
                   onClick={() => {
                     setVisible(false);
 
-                    deleteRepository();
+                    // deleteRepository();
                   }}
                 >
                   Delete

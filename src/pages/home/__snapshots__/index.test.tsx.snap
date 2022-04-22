@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Header /> should render correctly 1`] = `
+exports[`<Dashboard /> should render correctly 1`] = `
 <div>
   <nav
     class="management-bar navbar navbar-expand-md management-bar-light"
@@ -230,5 +230,48 @@ exports[`<Header /> should render correctly 1`] = `
       </ul>
     </div>
   </nav>
+  <div
+    class="container-fluid container-view container-fluid-max-xl"
+  >
+    <div
+      class="row"
+    />
+    <div
+      class="c-empty-state c-empty-state-animation"
+    >
+      <div
+        class="c-empty-state-image"
+      >
+        <div
+          class="c-empty-state-aspect-ratio"
+        >
+          <img
+            alt="satellite up and down"
+            class="aspect-ratio-item aspect-ratio-item-fluid"
+            src="animated_not_found_illustration.gif"
+            title="waiting for a repository"
+          />
+        </div>
+      </div>
+      <div
+        class="c-empty-state-title"
+      >
+        <span
+          class="text-truncate-inline"
+        >
+          <span
+            class="text-truncate"
+          >
+            There is still nothing here
+          </span>
+        </span>
+      </div>
+      <div
+        class="c-empty-state-text"
+      >
+        Add some repositories by clicking add new repository
+      </div>
+    </div>
+  </div>
 </div>
 `;
