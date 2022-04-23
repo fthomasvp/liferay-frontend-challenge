@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import _orderBy from 'lodash.orderby';
 
 import ClayManagementToolbar from '@clayui/management-toolbar';
 import ClayButton from '@clayui/button';
@@ -9,6 +10,7 @@ import { useHomeContext } from 'hooks/use-home.hook';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
 import SearchBar from '../search-bar/search-bar.component';
 import AddRepoPopover from 'components/add-repo/add-repo.component';
+import { GitHubRepo } from 'utils/types';
 import githubIcon from 'assets/icons/github.svg';
 import './styles.css';
 
@@ -23,12 +25,19 @@ const viewTypes = [
 
 const Header = (): JSX.Element => {
   const {
-    // orderRepositories,
     repositories,
+    setRepositories,
     isFilteringFavorites,
     setIsFilteringFavorites,
   } = useHomeContext();
-  const { setIsFiltering, setFilteredRepos } = useSearchBarContext();
+  const {
+    isFiltering,
+    setIsFiltering,
+    filteredRepos,
+    setFilteredRepos,
+  } = useSearchBarContext();
+
+  const [fieldToSort, setFieldToSort] = useState('');
 
   const viewTypeActive = viewTypes.find((type) => type.active);
 
@@ -37,6 +46,15 @@ const Header = (): JSX.Element => {
     setIsFilteringFavorites(
       (prevIsFilteringFavorites) => !prevIsFilteringFavorites
     );
+  };
+
+  const sortReposBy = (field: string) => {
+    setIsFiltering(true);
+
+    const repos = _orderBy(repositories, [field], ['desc']) as GitHubRepo[];
+
+    setRepositories(repos);
+    setFieldToSort(field);
   };
 
   useEffect(() => {
@@ -48,6 +66,18 @@ const Header = (): JSX.Element => {
 
     setFilteredRepos(repos);
   }, [isFilteringFavorites, repositories]);
+
+  useEffect(() => {
+    if (isFiltering) {
+      const repos = _orderBy(
+        filteredRepos,
+        [fieldToSort],
+        ['desc']
+      ) as GitHubRepo[];
+
+      setFilteredRepos(repos);
+    }
+  }, [isFiltering, fieldToSort]);
 
   // // Clear search text on toolbar after remove filters
   // React.useEffect(() => {
@@ -79,27 +109,27 @@ const Header = (): JSX.Element => {
                   {
                     label: 'Stars',
                     name: 'stargazers_count',
-                    // onClick: orderRepositories,
+                    onClick: () => sortReposBy('stargazers_count'),
                   },
                   {
                     label: 'Forks',
                     name: 'forks_count',
-                    // onClick: orderRepositories,
+                    onClick: () => sortReposBy('forks_count'),
                   },
                   {
                     label: 'Open issues',
                     name: 'open_issues_count',
-                    // onClick: orderRepositories,
+                    onClick: () => sortReposBy('open_issues_count'),
                   },
                   {
                     label: 'Age',
                     name: 'created_at',
-                    // onClick: orderRepositories,
+                    onClick: () => sortReposBy('created_at'),
                   },
                   {
                     label: 'Last commit',
                     name: 'lastCommitAt',
-                    // onClick: orderRepositories,
+                    onClick: () => sortReposBy('lastCommitAt'),
                   },
                 ],
               },

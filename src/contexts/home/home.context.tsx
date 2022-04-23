@@ -5,7 +5,6 @@ import { GitHubRepo } from 'utils/types';
 type HomeContextType = {
   repositories: GitHubRepo[];
   setRepositories: Dispatch<SetStateAction<GitHubRepo[]>>;
-  // orderRepositories: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   isFilteringFavorites: boolean;
   setIsFilteringFavorites: Dispatch<SetStateAction<boolean>>;
 };
@@ -13,7 +12,6 @@ type HomeContextType = {
 export const HomeContext = React.createContext<HomeContextType>({
   repositories: [],
   setRepositories: () => undefined,
-  // orderRepositories: () => null,
   isFilteringFavorites: false,
   setIsFilteringFavorites: () => null,
 });
@@ -28,7 +26,6 @@ export const HomeContextProvider = ({ children }: { children: ReactNode }) => {
       value={{
         repositories,
         setRepositories,
-        // orderRepositories,
         isFilteringFavorites,
         setIsFilteringFavorites,
       }}
