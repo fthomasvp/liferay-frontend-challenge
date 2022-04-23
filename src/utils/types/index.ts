@@ -10,10 +10,10 @@ export type GitHubRepo = {
     name: string;
   } | null;
   lastCommitAt: string | null;
-  isFavored: boolean;
+  isFavorited: boolean;
 };
 
 export type Filter = {
   repositoryName?: string;
-  isFavored?: boolean;
+  isFavorited?: boolean;
 };

@@ -8,10 +8,9 @@ type HomeContextType = {
   selectedRepository?: GitHubRepo;
   setSelectedRepository: Dispatch<SetStateAction<GitHubRepo | undefined>>;
   // deleteRepository: () => void;
-  // favorRepository: (repository: GitHubRepo) => void;
   // orderRepositories: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  starIcon: boolean;
-  setStarIcon: Dispatch<SetStateAction<boolean>>;
+  isFilteringFavorites: boolean;
+  setIsFilteringFavorites: Dispatch<SetStateAction<boolean>>;
 };
 
 export const HomeContext = React.createContext<HomeContextType>({
@@ -29,23 +28,22 @@ export const HomeContext = React.createContext<HomeContextType>({
       name: '',
     },
     lastCommitAt: '',
-    isFavored: false,
+    isFavorited: false,
   },
   setSelectedRepository: () => null,
   // deleteRepository: () => null,
   // orderRepositories: () => null,
-  // favorRepository: () => null,
-  starIcon: true,
-  setStarIcon: () => null,
+  isFilteringFavorites: false,
+  setIsFilteringFavorites: () => null,
 });
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const HomeContextProvider = ({ children }: { children: ReactNode }) => {
   const [repositories, setRepositories] = useState<GitHubRepo[]>([]);
+  const [isFilteringFavorites, setIsFilteringFavorites] = useState(false);
 
   //#region TODO: Verify if is necessary
   const [selectedRepository, setSelectedRepository] = useState<GitHubRepo>();
-  const [starIcon, setStarIcon] = useState(true);
   //#endregion
 
   return (
@@ -57,9 +55,8 @@ export const HomeContextProvider = ({ children }: { children: ReactNode }) => {
         setSelectedRepository,
         // deleteRepository,
         // orderRepositories,
-        // favorRepository,
-        starIcon,
-        setStarIcon,
+        isFilteringFavorites,
+        setIsFilteringFavorites,
       }}
     >
       {children}

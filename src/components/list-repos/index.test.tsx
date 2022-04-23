@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup, waitFor, fireEvent } from '@testing-library/react';
 
-import DynamicDisplay from './index';
+import DynamicDisplay from './list-repos.component';
 import { HomeContext } from 'contexts/home/home.context';
 import { GitHubRepo } from 'utils/types';
 
@@ -21,7 +21,7 @@ describe('<DynamicDisplay />', () => {
         name: 'Other',
       },
       lastCommitAt: '2021-03-05T12:23:22Z',
-      isFavored: false,
+      isFavorited: false,
     },
   ];
 

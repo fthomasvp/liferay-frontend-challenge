@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Header from 'components/header/header.component';
-import DynamicDisplay from 'components/dynamic-display';
+import ListRepos from 'components/list-repos/list-repos.component';
 import { HomeContextProvider } from 'contexts/home/home.context';
 import { SearchBarContextProvider } from 'contexts/search-bar/search-bar.context';
 
@@ -36,60 +36,12 @@ const HomePage = (): JSX.Element => {
   //   );
   // };
 
-  // const filterRepositories = (filter: Filter) => {
-  //   if (repositories.length > 0) {
-  //     let newFilteredRepositories: GitHubRepo[] = [];
-
-  //     if (filter?.repositoryName) {
-  //       newFilteredRepositories = repositories.filter((repo) => {
-  //         if (!filter.repositoryName) {
-  //           return false;
-  //         }
-
-  //         return repo.full_name.match(new RegExp(filter.repositoryName, 'i'));
-  //       });
-  //     }
-
-  //     if (filter?.isFavored) {
-  //       newFilteredRepositories = repositories.filter(
-  //         (repo) => repo.isFavored === filter.isFavored
-  //       );
-  //     }
-
-  //     setFilteredRepositories(newFilteredRepositories);
-  //   }
-  // };
-
-  // const favorRepository = (repository: GitHubRepo) => {
-  //   if (isFiltering) {
-  //     const newRepositories = filteredRepositories.map((repo) => {
-  //       if (repo.id === repository?.id) {
-  //         repo.isFavored = !repository.isFavored;
-  //       }
-
-  //       return repo;
-  //     });
-
-  //     setFilteredRepositories(newRepositories);
-  //   }
-
-  //   const newRepositories = repositories.map((repo) => {
-  //     if (repo.id === repository?.id) {
-  //       repo.isFavored = !repository.isFavored;
-  //     }
-
-  //     return repo;
-  //   });
-
-  //   setRepositories(newRepositories);
-  // };
-
   return (
     <HomeContextProvider>
       <SearchBarContextProvider>
         <Header />
 
-        <DynamicDisplay />
+        <ListRepos />
       </SearchBarContextProvider>
     </HomeContextProvider>
   );

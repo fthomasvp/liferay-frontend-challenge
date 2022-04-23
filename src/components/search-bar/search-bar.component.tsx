@@ -22,6 +22,12 @@ const SearchBar = (): JSX.Element => {
   const [repoName, setRepoName] = useState('');
 
   const filterRepos = () => {
+    if (repoName.trim().length === 0) {
+      setIsFiltering(false);
+
+      return;
+    }
+
     if (
       repoName.trim().length > MINIMUM_REPO_NAME_LENGTH &&
       repositories.length > 0

@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 
 import ClayManagementToolbar from '@clayui/management-toolbar';
 import ClayButton from '@clayui/button';
 import { ClayDropDownWithItems } from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
 
-import { HomeContext } from 'contexts/home/home.context';
+import { useHomeContext } from 'hooks/use-home.hook';
+import { useSearchBarContext } from 'hooks/use-search-bar.hook';
 import SearchBar from '../search-bar/search-bar.component';
 import AddRepoPopover from 'components/add-repo/add-repo.component';
 import githubIcon from 'assets/icons/github.svg';
@@ -23,11 +24,30 @@ const viewTypes = [
 const Header = (): JSX.Element => {
   const {
     // orderRepositories,
-    starIcon,
-    setStarIcon,
-  } = useContext(HomeContext);
+    repositories,
+    isFilteringFavorites,
+    setIsFilteringFavorites,
+  } = useHomeContext();
+  const { setIsFiltering, setFilteredRepos } = useSearchBarContext();
 
   const viewTypeActive = viewTypes.find((type) => type.active);
+
+  const handleClickFilterFavorites = () => {
+    setIsFiltering(true);
+    setIsFilteringFavorites(
+      (prevIsFilteringFavorites) => !prevIsFilteringFavorites
+    );
+  };
+
+  useEffect(() => {
+    let repos = repositories;
+
+    if (isFilteringFavorites) {
+      repos = repositories.filter(({ isFavorited }) => isFavorited);
+    }
+
+    setFilteredRepos(repos);
+  }, [isFilteringFavorites, repositories]);
 
   // // Clear search text on toolbar after remove filters
   // React.useEffect(() => {
@@ -121,17 +141,11 @@ const Header = (): JSX.Element => {
         <ClayManagementToolbar.Item>
           <ClayButton
             className="nav-link nav-link-monospaced"
+            disabled={repositories.length === 0}
             displayType="unstyled"
-            onClick={() => {
-              // setIsFiltering(true);
-              // filterRepositories({
-              //   isFavored: starIcon,
-              // });
-
-              setStarIcon((prevState) => !prevState);
-            }}
+            onClick={handleClickFilterFavorites}
           >
-            <ClayIcon symbol={starIcon ? 'star-o' : 'star'} />
+            <ClayIcon symbol={isFilteringFavorites ? 'star' : 'star-o'} />
           </ClayButton>
         </ClayManagementToolbar.Item>
 

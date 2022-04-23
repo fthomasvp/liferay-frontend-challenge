@@ -72,8 +72,8 @@ const AddRepoPopover = (): JSX.Element => {
       repository.lastCommitAt = date;
     }
 
-    // Add `isFavored` property (default is false)
-    repository.isFavored = false;
+    // Add `isFavorited` property (default is false)
+    repository.isFavorited = false;
 
     setRepositories((prevRepos) => [repository, ...prevRepos]);
 
