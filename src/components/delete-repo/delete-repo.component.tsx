@@ -3,26 +3,41 @@ import React from 'react';
 import ClayButton from '@clayui/button';
 import ClayModal, { useModal } from '@clayui/modal';
 
-import { HomeContext } from 'contexts/home/home.context';
+import { useHomeContext } from 'hooks/use-home.hook';
+import { GitHubRepo } from 'utils/types';
+import { useSearchBarContext } from 'hooks/use-search-bar.hook';
 
 type Props = {
+  repo: GitHubRepo | null;
   visible: boolean;
   setVisible: (isVisible: boolean) => void;
 };
 
-const ModalDelete = ({ visible, setVisible }: Props): JSX.Element => {
-  const { selectedRepository /*deleteRepository*/ } = React.useContext(
-    HomeContext
-  );
+const DeleteRepoModal = ({ repo, visible, setVisible }: Props): JSX.Element => {
+  const { repositories, setRepositories } = useHomeContext();
+  const { isFiltering, setFilteredRepos } = useSearchBarContext();
 
   const { observer, onClose } = useModal({
     onClose: () => setVisible(false),
   });
 
+  const handleClickDeleteRepo = () => {
+    if (repo) {
+      const repos = repositories.filter(({ id }) => id !== repo.id);
+      setRepositories(repos);
+
+      if (isFiltering) {
+        setFilteredRepos(repos);
+      }
+    }
+
+    onClose();
+  };
+
   return (
     <>
       {visible && (
-        <ClayModal observer={observer} size="sm" status="danger" center>
+        <ClayModal center observer={observer} size="sm" status="danger">
           <ClayModal.Header>Delete repository</ClayModal.Header>
           <ClayModal.Body>
             <p style={{ color: '#333' }}>
@@ -31,7 +46,7 @@ const ModalDelete = ({ visible, setVisible }: Props): JSX.Element => {
                 data-testid="repositoryFullName"
                 className="font-weight-semi-bold"
               >
-                {selectedRepository?.full_name}
+                {repo?.full_name}
               </span>{' '}
               repository?
             </p>
@@ -44,11 +59,7 @@ const ModalDelete = ({ visible, setVisible }: Props): JSX.Element => {
                 </ClayButton>
                 <ClayButton
                   className="btn btn-danger"
-                  onClick={() => {
-                    setVisible(false);
-
-                    // deleteRepository();
-                  }}
+                  onClick={handleClickDeleteRepo}
                 >
                   Delete
                 </ClayButton>
@@ -61,4 +72,4 @@ const ModalDelete = ({ visible, setVisible }: Props): JSX.Element => {
   );
 };
 
-export default ModalDelete;
+export default DeleteRepoModal;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 
 import ClayCard from '@clayui/card';
@@ -9,7 +9,7 @@ import ClayButton, { ClayButtonWithIcon } from '@clayui/button';
 
 import { useHomeContext } from 'hooks/use-home.hook';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
-import ModalDelete from './modal-delete';
+import DeleteRepoModal from '../delete-repo/delete-repo.component';
 import liferayLogo from 'assets/icons/liferay_logo.svg';
 import animatedNotFoundIllustration from 'assets/images/animated_not_found_illustration.gif';
 import { GitHubRepo } from 'utils/types';
@@ -19,7 +19,6 @@ const ListRepos = (): JSX.Element => {
     repositories,
     setRepositories,
     setIsFilteringFavorites,
-    setSelectedRepository,
   } = useHomeContext();
   const {
     filteredRepos,
@@ -28,7 +27,8 @@ const ListRepos = (): JSX.Element => {
     setIsFiltering,
   } = useSearchBarContext();
 
-  const [visible, setVisible] = React.useState(false);
+  const [isDeleteRepoVisible, setIsDeleteRepoVisible] = useState(false);
+  const [selectedRepo, setSelectedRepo] = useState<GitHubRepo | null>(null);
 
   const items = isFiltering ? filteredRepos : repositories;
 
@@ -51,6 +51,12 @@ const ListRepos = (): JSX.Element => {
   const handleClickClearFilter = () => {
     setIsFiltering(false);
     setIsFilteringFavorites(false);
+  };
+
+  const handleClickOpenDeleteRepo = (repo: GitHubRepo) => {
+    setIsDeleteRepoVisible(true);
+
+    setSelectedRepo(repo);
   };
 
   return (
@@ -86,11 +92,7 @@ const ListRepos = (): JSX.Element => {
                       data-testid="trashIcon"
                       aria-label="Trash"
                       displayType="unstyled"
-                      onClick={() => {
-                        setVisible(true);
-
-                        setSelectedRepository(repo);
-                      }}
+                      onClick={() => handleClickOpenDeleteRepo(repo)}
                       symbol="trash"
                     />
                   </ClayCard.Row>
@@ -222,7 +224,11 @@ const ListRepos = (): JSX.Element => {
             )}
       </ClayLayout.ContainerFluid>
 
-      <ModalDelete visible={visible} setVisible={setVisible} />
+      <DeleteRepoModal
+        repo={selectedRepo}
+        visible={isDeleteRepoVisible}
+        setVisible={setIsDeleteRepoVisible}
+      />
     </>
   );
 };
