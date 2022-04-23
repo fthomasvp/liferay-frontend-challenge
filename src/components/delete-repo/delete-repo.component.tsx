@@ -4,8 +4,8 @@ import ClayButton from '@clayui/button';
 import ClayModal, { useModal } from '@clayui/modal';
 
 import { useHomeContext } from 'hooks/use-home.hook';
-import { GitHubRepo } from 'utils/types';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
+import { GitHubRepo } from 'services/github.service';
 
 type Props = {
   repo: GitHubRepo | null;

@@ -1,6 +1,6 @@
 import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
-import { GitHubRepo } from 'utils/types';
+import { GitHubRepo } from 'services/github.service';
 
 type HomeContextType = {
   repositories: GitHubRepo[];

@@ -3,7 +3,7 @@ import { render, cleanup } from '@testing-library/react';
 
 import Dashboard from './home.page';
 import { HomeContext } from 'contexts/home/home.context';
-import { GitHubRepo } from 'utils/types';
+import { GitHubRepo } from 'services/github.service';
 
 describe('<Dashboard />', () => {
   afterEach(cleanup);

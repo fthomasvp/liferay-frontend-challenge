@@ -10,9 +10,9 @@ import ClayButton, { ClayButtonWithIcon } from '@clayui/button';
 import { useHomeContext } from 'hooks/use-home.hook';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
 import DeleteRepoModal from '../delete-repo/delete-repo.component';
+import { GitHubRepo } from 'services/github.service';
 import liferayLogo from 'assets/icons/liferay_logo.svg';
 import animatedNotFoundIllustration from 'assets/images/animated_not_found_illustration.gif';
-import { GitHubRepo } from 'utils/types';
 
 const ListRepos = (): JSX.Element => {
   const {

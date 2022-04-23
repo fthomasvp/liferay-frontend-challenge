@@ -10,7 +10,7 @@ import { useHomeContext } from 'hooks/use-home.hook';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
 import SearchBar from '../search-bar/search-bar.component';
 import AddRepoPopover from 'components/add-repo/add-repo.component';
-import { GitHubRepo } from 'utils/types';
+import { GitHubRepo } from 'services/github.service';
 import githubIcon from 'assets/icons/github.svg';
 import './styles.css';
 

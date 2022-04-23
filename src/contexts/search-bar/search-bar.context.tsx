@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 
-import { GitHubRepo } from 'utils/types';
+import { GitHubRepo } from 'services/github.service';
 
 type SearchBarContextType = {
   filteredRepos: GitHubRepo[];

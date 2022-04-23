@@ -3,7 +3,7 @@ import { render, cleanup, waitFor, fireEvent } from '@testing-library/react';
 
 import DynamicDisplay from './list-repos.component';
 import { HomeContext } from 'contexts/home/home.context';
-import { GitHubRepo } from 'utils/types';
+import { GitHubRepo } from 'services/github.service';
 
 describe('<DynamicDisplay />', () => {
   afterEach(cleanup);

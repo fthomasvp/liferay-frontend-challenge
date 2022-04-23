@@ -5,10 +5,9 @@ import { ClayInput } from '@clayui/form';
 import { ClayButtonWithIcon } from '@clayui/button';
 
 import { HomeContext } from 'contexts/home/home.context';
-import { GitHubRepo } from 'utils/types';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
-
-const MINIMUM_REPO_NAME_LENGTH = 1;
+import { GitHubRepo } from 'services/github.service';
+import { MINIMUM_REPO_NAME_LENGTH } from 'utils/constants';
 
 const SearchBar = (): JSX.Element => {
   const { repositories } = useContext(HomeContext);
