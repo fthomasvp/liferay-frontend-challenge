@@ -3,7 +3,7 @@ import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
 
 import Header from './header.component';
 
-describe('<Header />', () => {
+describe.skip('<Header />', () => {
   afterEach(cleanup);
 
   test('should render correctly', () => {

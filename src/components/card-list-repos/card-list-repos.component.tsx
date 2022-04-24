@@ -9,12 +9,12 @@ import ClayButton, { ClayButtonWithIcon } from '@clayui/button';
 
 import { useHomeContext } from 'hooks/use-home.hook';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
-import DeleteRepoModal from '../delete-repo/delete-repo.component';
 import { GitHubRepo } from 'services/github.service';
+import DeleteRepoModal from '../delete-repo/delete-repo.component';
 import liferayLogo from 'assets/icons/liferay_logo.svg';
 import animatedNotFoundIllustration from 'assets/images/animated_not_found_illustration.gif';
 
-const ListRepos = (): JSX.Element => {
+const CardListRepos = (): JSX.Element => {
   const {
     repositories,
     setRepositories,
@@ -70,13 +70,10 @@ const ListRepos = (): JSX.Element => {
                   <ClayCard.Row
                     style={{ height: '50px', alignItems: 'center' }}
                   >
-                    <img src={liferayLogo} alt="Liferay logo" />
+                    <img alt="Liferay logo" src={liferayLogo} />
 
                     <ClayLayout.Col size={8}>
-                      <ClayCard.Description
-                        data-testid="fullName"
-                        displayType="title"
-                      >
+                      <ClayCard.Description displayType="title">
                         {repo.full_name}
                       </ClayCard.Description>
                     </ClayLayout.Col>
@@ -89,7 +86,6 @@ const ListRepos = (): JSX.Element => {
                     />
 
                     <ClayButtonWithIcon
-                      data-testid="trashIcon"
                       aria-label="Trash"
                       displayType="unstyled"
                       onClick={() => handleClickOpenDeleteRepo(repo)}
@@ -233,4 +229,4 @@ const ListRepos = (): JSX.Element => {
   );
 };
 
-export default ListRepos;
+export default CardListRepos;

@@ -8,7 +8,7 @@ import React, {
 
 import { GitHubRepo } from 'services/github.service';
 
-type SearchBarContextType = {
+export type SearchBarContextType = {
   filteredRepos: GitHubRepo[];
   setFilteredRepos: Dispatch<SetStateAction<GitHubRepo[]>>;
   isFiltering: boolean;

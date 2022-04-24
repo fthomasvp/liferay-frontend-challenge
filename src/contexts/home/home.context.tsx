@@ -1,15 +1,21 @@
-import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import React, {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from 'react';
 
 import { GitHubRepo } from 'services/github.service';
 
-type HomeContextType = {
+export type HomeContextType = {
   repositories: GitHubRepo[];
   setRepositories: Dispatch<SetStateAction<GitHubRepo[]>>;
   isFilteringFavorites: boolean;
   setIsFilteringFavorites: Dispatch<SetStateAction<boolean>>;
 };
 
-export const HomeContext = React.createContext<HomeContextType>({
+export const HomeContext = createContext<HomeContextType>({
   repositories: [],
   setRepositories: () => undefined,
   isFilteringFavorites: false,
