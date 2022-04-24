@@ -9,6 +9,14 @@
     "url": "https://github.com/fthomasvp/liferay-frontend-challenge"
   },
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "lint": "eslint --fix \"{src,apps,libs,test,spec}/**/*.{ts,tsx}\""
+  },
   "dependencies": {
     "@clayui/button": "^3.6.0",
     "@clayui/card": "^3.25.1",
@@ -49,14 +57,6 @@
     "eslint": "^7.21.0",
     "eslint-plugin-react": "^7.22.0",
     "prettier": "^2.2.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --updateSnapshot",
-    "eject": "react-scripts eject",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "lint": "eslint --fix \"{src,apps,libs,test}/**/*.{ts,tsx}\""
   },
   "eslintConfig": {
     "extends": [
