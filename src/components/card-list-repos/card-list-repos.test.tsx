@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 
-import { render, cleanup, waitFor, fireEvent } from 'utils/test-utils';
+import { render, cleanup } from 'utils/test-utils';
 import { GitHubRepo } from 'services/github.service';
 import ListRepos from './card-list-repos.component';
 
@@ -97,56 +97,38 @@ describe('ListRepos', () => {
     expect(getByTestId('language')).toHaveTextContent('HTML');
   });
 
-  // it.skip('when no commit is found, should display "No commits yet" on card', () => {
-  //   const [repository] = repositories;
+  it('should show "No commits yet" when repo does not have commits', () => {
+    const [repo] = repositories;
+    repo.lastCommitAt = null;
 
-  //   repository.lastCommitAt = null;
+    const { getByTestId } = render(<ListRepos />, {
+      homeProviderProps: {
+        ...homeProviderProps,
+        value: {
+          ...homeProviderProps.value,
+          repositories: [repo],
+        },
+      },
+      searchBarProviderProps,
+    });
 
-  //   const updatedProps = {
-  //     ...props,
-  //     repositories: [repository],
-  //   };
+    expect(getByTestId('lastCommitAt')).toHaveTextContent('No commits yet');
+  });
 
-  //   const { getByTestId } = render(
-  //     <HomeContext.Provider value={updatedProps}>
-  //       <DynamicDisplay {...dynamicDisplayProps} />
-  //     </HomeContext.Provider>
-  //   );
-  //   expect(getByTestId('lastCommitAt')).toHaveTextContent('No commits yet');
-  // });
+  it('should show "N/A" when repo does not have a license', () => {
+    const [repo] = repositories;
+    repo.license = null;
 
-  // it.skip('when no license is found, should display "N/A" on card', () => {
-  //   const [repository] = repositories;
-
-  //   repository.license = null;
-
-  //   const updatedProps = {
-  //     ...props,
-  //     repositories: [repository],
-  //   };
-
-  //   const { getByTestId } = render(
-  //     <HomeContext.Provider value={updatedProps}>
-  //       <DynamicDisplay {...dynamicDisplayProps} />
-  //     </HomeContext.Provider>
-  //   );
-  //   expect(getByTestId('license')).toHaveTextContent('License N/A');
-  // });
-
-  // it.skip('when click on the trash icon, should display the delete modal', async () => {
-  //   const { getByTestId, getByText } = render(
-  //     <HomeContext.Provider value={props}>
-  //       <DynamicDisplay {...dynamicDisplayProps} />
-  //     </HomeContext.Provider>
-  //   );
-
-  //   fireEvent.click(getByTestId('trashIcon'));
-
-  //   const repositoryFullName = await waitFor(() =>
-  //     getByTestId('repositoryFullName')
-  //   );
-  //   expect(repositoryFullName).toHaveTextContent('liferay/clay');
-  //   expect(getByText('Delete')).toBeInTheDocument();
-  //   expect(getByText('Cancel')).toBeInTheDocument();
-  // });
+    const { getByTestId } = render(<ListRepos />, {
+      homeProviderProps: {
+        ...homeProviderProps,
+        value: {
+          ...homeProviderProps.value,
+          repositories: [repo],
+        },
+      },
+      searchBarProviderProps,
+    });
+    expect(getByTestId('license')).toHaveTextContent('License N/A');
+  });
 });

@@ -39,6 +39,7 @@ const DeleteRepoModal = ({ repo, visible, setVisible }: Props): JSX.Element => {
       {visible && (
         <ClayModal center observer={observer} size="sm" status="danger">
           <ClayModal.Header>Delete repository</ClayModal.Header>
+
           <ClayModal.Body>
             <p style={{ color: '#333' }}>
               Are you sure to delete the{' '}
@@ -51,6 +52,7 @@ const DeleteRepoModal = ({ repo, visible, setVisible }: Props): JSX.Element => {
               repository?
             </p>
           </ClayModal.Body>
+
           <ClayModal.Footer
             last={
               <ClayButton.Group spaced>
