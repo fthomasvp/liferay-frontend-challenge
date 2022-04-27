@@ -17,9 +17,11 @@ const DeleteRepoModal = ({ repo, visible, setVisible }: Props): JSX.Element => {
   const { repositories, setRepositories } = useHomeContext();
   const { isFiltering, setFilteredRepos } = useSearchBarContext();
 
-  const { observer, onClose } = useModal({
-    onClose: () => setVisible(false),
-  });
+  const handleClose = () => {
+    setVisible(false);
+  };
+
+  const { observer } = useModal({});
 
   const handleClickDeleteRepo = () => {
     if (repo) {
@@ -31,7 +33,7 @@ const DeleteRepoModal = ({ repo, visible, setVisible }: Props): JSX.Element => {
       }
     }
 
-    onClose();
+    handleClose();
   };
 
   return (
@@ -56,7 +58,7 @@ const DeleteRepoModal = ({ repo, visible, setVisible }: Props): JSX.Element => {
           <ClayModal.Footer
             last={
               <ClayButton.Group spaced>
-                <ClayButton displayType="secondary" onClick={onClose}>
+                <ClayButton displayType="secondary" onClick={handleClose}>
                   Cancel
                 </ClayButton>
                 <ClayButton
