@@ -129,7 +129,6 @@ const AddRepoPopover = (): JSX.Element => {
               </span>
             </label>
             <ClayInput
-              data-testid="repositoryTextInput"
               id="repository"
               onChange={handleChangeRepoName}
               onKeyPress={handleKeyPress}
@@ -149,19 +148,9 @@ const AddRepoPopover = (): JSX.Element => {
       }
       onShowChange={setIsShowPopover}
       show={isShowPopover}
-      trigger={
-        <ClayButtonWithIcon
-          data-testid="addButtonToolbarManagement"
-          aria-label="Add button"
-          symbol="plus"
-        />
-      }
+      trigger={<ClayButtonWithIcon aria-label="Add button" symbol="plus" />}
     >
-      <ClayButton.Group
-        data-testid="popoverButtonActions"
-        className="d-flex justify-content-end"
-        spaced
-      >
+      <ClayButton.Group className="d-flex justify-content-end" spaced>
         <ClayButton displayType="secondary" onClick={onClosePopover}>
           Cancel
         </ClayButton>
