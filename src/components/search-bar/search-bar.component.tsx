@@ -1,16 +1,16 @@
-import React, { KeyboardEvent, useContext, useState } from 'react';
+import React, { KeyboardEvent, useState } from 'react';
 
 import ClayManagementToolbar from '@clayui/management-toolbar';
 import { ClayInput } from '@clayui/form';
 import { ClayButtonWithIcon } from '@clayui/button';
 
-import { HomeContext } from 'contexts/home/home.context';
+import { useHomeContext } from 'hooks/use-home.hook';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
 import { GitHubRepo } from 'services/github.service';
 import { MINIMUM_REPO_NAME_LENGTH } from 'utils/constants';
 
 const SearchBar = (): JSX.Element => {
-  const { repositories } = useContext(HomeContext);
+  const { repositories } = useHomeContext();
   const {
     isShowMobile,
     setIsShowMobile,
@@ -72,6 +72,7 @@ const SearchBar = (): JSX.Element => {
               symbol="times"
             />
             <ClayButtonWithIcon
+              aria-label="Search Icon"
               displayType="unstyled"
               onClick={filterRepos}
               symbol="search"
