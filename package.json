@@ -9,6 +9,14 @@
     "url": "https://github.com/fthomasvp/liferay-frontend-challenge"
   },
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "lint": "eslint --fix \"{src,apps,libs,test,spec}/**/*.{ts,tsx}\""
+  },
   "dependencies": {
     "@clayui/button": "^3.6.0",
     "@clayui/card": "^3.25.1",
@@ -26,10 +34,6 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
     "date-fns": "^2.19.0",
     "lodash.orderby": "^4.6.0",
     "react": "^17.0.1",
@@ -42,21 +46,17 @@
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
+    "@types/jest": "^26.0.15",
     "@types/lodash.orderby": "^4.6.6",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "eslint": "^7.21.0",
     "eslint-plugin-react": "^7.22.0",
     "prettier": "^2.2.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --updateSnapshot",
-    "eject": "react-scripts eject",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "lint": "eslint --fix \"{src,apps,libs,test}/**/*.{ts,tsx}\""
   },
   "eslintConfig": {
     "extends": [
