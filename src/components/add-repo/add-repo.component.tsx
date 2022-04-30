@@ -113,7 +113,6 @@ const AddRepoPopover = (): JSX.Element => {
     <ClayPopover
       disableScroll
       alignPosition="bottom-right"
-      data-testid="popover"
       header={
         <>
           <p className="font-weight-semi-bold popover-title">New repository</p>

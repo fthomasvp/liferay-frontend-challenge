@@ -3,8 +3,9 @@ import _orderBy from 'lodash.orderby';
 
 import ClayManagementToolbar from '@clayui/management-toolbar';
 import ClayButton from '@clayui/button';
-import { ClayDropDownWithItems } from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
+import { ClayDropDownWithItems } from '@clayui/drop-down';
+import { IItem } from '@clayui/drop-down/lib/drilldown/Menu';
 
 import { useHomeContext } from 'hooks/use-home.hook';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
@@ -12,7 +13,7 @@ import SearchBar from '../search-bar/search-bar.component';
 import AddRepoPopover from 'components/add-repo/add-repo.component';
 import { GitHubRepo } from 'services/github.service';
 import githubIcon from 'assets/icons/github.svg';
-import './styles.css';
+import './header.styles.css';
 
 const viewTypes = [
   {
@@ -57,6 +58,41 @@ const Header = (): JSX.Element => {
     setFieldToSort(field);
   };
 
+  const sortOptions: IItem[] = [
+    {
+      title: '',
+      label: 'ORDER BY',
+      type: 'group',
+      items: [
+        {
+          label: 'Stars',
+          name: 'stargazers_count',
+          onClick: () => sortReposBy('stargazers_count'),
+        },
+        {
+          label: 'Forks',
+          name: 'forks_count',
+          onClick: () => sortReposBy('forks_count'),
+        },
+        {
+          label: 'Open issues',
+          name: 'open_issues_count',
+          onClick: () => sortReposBy('open_issues_count'),
+        },
+        {
+          label: 'Age',
+          name: 'created_at',
+          onClick: () => sortReposBy('created_at'),
+        },
+        {
+          label: 'Last commit',
+          name: 'lastCommitAt',
+          onClick: () => sortReposBy('lastCommitAt'),
+        },
+      ],
+    },
+  ];
+
   useEffect(() => {
     let repos = repositories;
 
@@ -79,15 +115,8 @@ const Header = (): JSX.Element => {
     }
   }, [isFiltering, fieldToSort]);
 
-  // // Clear search text on toolbar after remove filters
-  // React.useEffect(() => {
-  //   if (!isFiltering) {
-  //     setSearchText('');
-  //   }
-  // }, [isFiltering]);
-
   return (
-    <ClayManagementToolbar data-testid="managementToolbar">
+    <ClayManagementToolbar>
       <ClayManagementToolbar.ItemList>
         <ClayManagementToolbar.Item style={{ marginRight: '1.2rem' }}>
           <img src={githubIcon} alt="github logo" />
@@ -101,39 +130,7 @@ const Header = (): JSX.Element => {
 
         <ClayManagementToolbar.Item>
           <ClayDropDownWithItems
-            items={[
-              {
-                label: 'ORDER BY',
-                type: 'group',
-                items: [
-                  {
-                    label: 'Stars',
-                    name: 'stargazers_count',
-                    onClick: () => sortReposBy('stargazers_count'),
-                  },
-                  {
-                    label: 'Forks',
-                    name: 'forks_count',
-                    onClick: () => sortReposBy('forks_count'),
-                  },
-                  {
-                    label: 'Open issues',
-                    name: 'open_issues_count',
-                    onClick: () => sortReposBy('open_issues_count'),
-                  },
-                  {
-                    label: 'Age',
-                    name: 'created_at',
-                    onClick: () => sortReposBy('created_at'),
-                  },
-                  {
-                    label: 'Last commit',
-                    name: 'lastCommitAt',
-                    onClick: () => sortReposBy('lastCommitAt'),
-                  },
-                ],
-              },
-            ]}
+            items={sortOptions}
             trigger={
               <ClayButton className="nav-link" displayType="unstyled">
                 <span className="navbar-breakpoint-down-d-none">
@@ -170,6 +167,7 @@ const Header = (): JSX.Element => {
 
         <ClayManagementToolbar.Item>
           <ClayButton
+            aria-label="Star filter button"
             className="nav-link nav-link-monospaced"
             disabled={repositories.length === 0}
             displayType="unstyled"
@@ -197,9 +195,7 @@ const Header = (): JSX.Element => {
                 className="nav-link-monospaced nav-link"
                 displayType="unstyled"
               >
-                <ClayIcon
-                  symbol={viewTypeActive ? viewTypeActive.symbolLeft : ''}
-                />
+                <ClayIcon symbol={viewTypeActive?.symbolLeft ?? ''} />
               </ClayButton>
             }
           />
