@@ -28,13 +28,13 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile --silent
 
-      - name: Run Unit Tests
+      - name: Unit Tests
         run: yarn test
 
       - name: Build
         run: yarn build
 
-      - name: Run Semantic Release
+      - name: Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
