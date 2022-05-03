@@ -104,7 +104,7 @@ const Header = (): JSX.Element => {
   }, [isFilteringFavorites, repositories]);
 
   useEffect(() => {
-    if (isFiltering) {
+    if (isFiltering && fieldToSort) {
       const repos = _orderBy(
         filteredRepos,
         [fieldToSort],
