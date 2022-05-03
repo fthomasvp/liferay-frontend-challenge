@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/fthomasvp/liferay-frontend-challenge/compare/v1.0.1...v1.0.2) (2022-05-03)
+
+
+### Bug Fixes
+
+* add prop to useEffect when sort repos ([e336013](https://github.com/fthomasvp/liferay-frontend-challenge/commit/e336013dc286b5ed99bd659a9cc63a81e8c4b089))
+* lint warning ([a024335](https://github.com/fthomasvp/liferay-frontend-challenge/commit/a0243352b3236269278a33e0e40a4e1fbbaf3248))
+
 ## [1.0.1](https://github.com/fthomasvp/liferay-frontend-challenge/compare/v1.0.0...v1.0.1) (2021-03-09)
 
 
