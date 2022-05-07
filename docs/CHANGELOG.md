@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/fthomasvp/liferay-frontend-challenge/compare/v1.0.2...v1.1.0) (2022-05-07)
+
+
+### Features
+
+* add Not Found page and Loading Indicator component ([9c075c3](https://github.com/fthomasvp/liferay-frontend-challenge/commit/9c075c3bca39a8bd54fe1a54756b8b3f6d3b1f52))
+
 ## [1.0.2](https://github.com/fthomasvp/liferay-frontend-challenge/compare/v1.0.1...v1.0.2) (2022-05-03)
 
 
