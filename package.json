@@ -2,7 +2,8 @@
   "name": "liferay-frontend-challenge",
   "version": "1.0.1",
   "engines": {
-    "node": ">=10.x"
+    "node": ">=14.17.x",
+    "yarn": ">=1.22.x"
   },
   "repository": {
     "type": "git",
