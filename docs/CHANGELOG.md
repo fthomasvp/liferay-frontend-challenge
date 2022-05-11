@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/fthomasvp/liferay-frontend-challenge/compare/v1.1.0...v1.2.0) (2022-05-11)
+
+
+### Features
+
+* add ErrorBoundary ([9434832](https://github.com/fthomasvp/liferay-frontend-challenge/commit/94348323327f6a5c4df4d317cd4d873097f3eb1c))
+
 # [1.1.0](https://github.com/fthomasvp/liferay-frontend-challenge/compare/v1.0.2...v1.1.0) (2022-05-07)
 
 
