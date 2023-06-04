@@ -3,7 +3,6 @@ import { createContext, useContext } from 'react';
 
 export type THomeContext = {
   repositories: TGitHubRepo[];
-  // setRepositories: Dispatch<SetStateAction<TGitHubRepo[]>>;
   setRepositories: (repos: TGitHubRepo[]) => void;
   isStarred: boolean;
   setIsStarred: (isStarred: boolean) => void;
