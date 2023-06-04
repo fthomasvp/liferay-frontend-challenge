@@ -9,7 +9,7 @@ import { ClayButtonWithIcon } from '@clayui/button';
 import { getRepository, getRepositoryCommits } from 'features/github/services';
 import { useHomeContext } from 'context/HomeContext';
 
-const AddRepoPopover = (): JSX.Element => {
+const AddRepoPopover = () => {
   const { repositories, setRepositories } = useHomeContext();
 
   const [error, setError] = useState('');
@@ -95,10 +95,8 @@ const AddRepoPopover = (): JSX.Element => {
   };
 
   useEffect(() => {
-    if (isShowPopover) {
-      if (repoNameRef.current) {
-        repoNameRef.current.focus();
-      }
+    if (isShowPopover && repoNameRef.current) {
+      repoNameRef.current.focus();
     }
   }, [isShowPopover]);
 

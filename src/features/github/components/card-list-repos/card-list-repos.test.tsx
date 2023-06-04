@@ -50,7 +50,7 @@ describe('ListRepos', () => {
       searchBarProviderProps,
     });
 
-    expect(getByRole('img', { name: 'Liferay logo' })).toBeInTheDocument();
+    expect(getByRole('img', { name: 'Liferay' })).toBeInTheDocument();
     expect(getByTitle('liferay/clay')).toBeInTheDocument();
     expect(getByRole('button', { name: 'Star' })).toBeInTheDocument();
     expect(getByRole('button', { name: 'Trash' })).toBeInTheDocument();

@@ -8,23 +8,15 @@ import { ClayDropDownWithItems } from '@clayui/drop-down';
 import { IItem } from '@clayui/drop-down/lib/drilldown/Menu';
 
 import { useHomeContext } from 'context/HomeContext';
-import { useSearchBarContext } from 'hooks/use-search-bar.hook';
-import SearchBar from '../search-bar/search-bar.component';
-import AddRepoPopover from 'components/add-repo/add-repo.component';
-import { TGitHubRepo } from 'features/github';
-import githubIcon from 'assets/icons/github.svg';
-import './header.styles.css';
+import { useSearchBarContext } from 'context/SearchBarContext';
+import { SearchBar } from '../SearchBar';
 
-const viewTypes = [
-  {
-    active: true,
-    disabled: true,
-    label: 'Card',
-    symbolLeft: 'cards2',
-  },
-];
+import { AddRepoPopover, TGitHubRepo } from 'features/github';
+import GitHubIcon from 'assets/icons/github.svg';
+import { VIEW_TYPES } from 'utils/constants';
+import './styles.css';
 
-const Header = (): JSX.Element => {
+const Header = () => {
   const {
     repositories,
     setRepositories,
@@ -40,7 +32,7 @@ const Header = (): JSX.Element => {
 
   const [fieldToSort, setFieldToSort] = useState('');
 
-  const viewTypeActive = viewTypes.find((type) => type.active);
+  const viewTypeActive = VIEW_TYPES.find((type) => type.active);
 
   const handleClickFilterFavorites = () => {
     setIsFiltering(true);
@@ -99,7 +91,7 @@ const Header = (): JSX.Element => {
     }
 
     setFilteredRepos(repos);
-  }, [isStarred, repositories]);
+  }, [isStarred, repositories, setFilteredRepos]);
 
   useEffect(() => {
     if (isFiltering && fieldToSort) {
@@ -111,13 +103,13 @@ const Header = (): JSX.Element => {
 
       setFilteredRepos(repos);
     }
-  }, [isFiltering, fieldToSort]);
+  }, [isFiltering, fieldToSort, filteredRepos, setFilteredRepos]);
 
   return (
     <ClayManagementToolbar>
       <ClayManagementToolbar.ItemList>
         <ClayManagementToolbar.Item style={{ marginRight: '1.2rem' }}>
-          <img src={githubIcon} alt="github logo" />
+          <img src={GitHubIcon} alt="github" />
         </ClayManagementToolbar.Item>
 
         <ClayManagementToolbar.Item>
@@ -187,7 +179,7 @@ const Header = (): JSX.Element => {
 
         <ClayManagementToolbar.Item>
           <ClayDropDownWithItems
-            items={viewTypes}
+            items={VIEW_TYPES}
             trigger={
               <ClayButton
                 className="nav-link-monospaced nav-link"

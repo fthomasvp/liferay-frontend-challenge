@@ -5,7 +5,7 @@ import Spritemap from '@clayui/css/lib/images/icons/icons.svg';
 
 import Pages from 'pages';
 
-const App = (): JSX.Element => {
+const App = () => {
   return (
     <ClayIconSpriteContext.Provider value={Spritemap}>
       <Pages />

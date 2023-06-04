@@ -2,9 +2,9 @@ import React from 'react';
 
 import ClayLoadingIndicator from '@clayui/loading-indicator';
 
-import './loading-indicator.styles.css';
+import './styles.css';
 
-const LoadingIndicator = (): JSX.Element => {
+const Loading = () => {
   return (
     <div className="loading-indicator">
       <ClayLoadingIndicator />
@@ -12,4 +12,4 @@ const LoadingIndicator = (): JSX.Element => {
   );
 };
 
-export default LoadingIndicator;
+export default Loading;

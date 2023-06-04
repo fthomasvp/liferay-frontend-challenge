@@ -5,7 +5,7 @@ import { ClayInput } from '@clayui/form';
 import { ClayButtonWithIcon } from '@clayui/button';
 
 import { useHomeContext } from 'context/HomeContext';
-import { useSearchBarContext } from 'hooks/use-search-bar.hook';
+import { useSearchBarContext } from 'context/SearchBarContext';
 import { TGitHubRepo } from 'features/github';
 import { MINIMUM_REPO_NAME_LENGTH } from 'utils/constants';
 

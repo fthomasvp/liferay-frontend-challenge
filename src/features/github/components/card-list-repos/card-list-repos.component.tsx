@@ -8,13 +8,12 @@ import ClayEmptyState from '@clayui/empty-state';
 import ClayButton, { ClayButtonWithIcon } from '@clayui/button';
 
 import { useHomeContext } from 'context/HomeContext';
-import { useSearchBarContext } from 'hooks/use-search-bar.hook';
-import { TGitHubRepo } from 'features/github';
-import DeleteRepoModal from '../delete-repo/delete-repo.component';
+import { useSearchBarContext } from 'context/SearchBarContext';
+import { DeleteRepoModal, TGitHubRepo } from 'features/github';
 import liferayLogo from 'assets/icons/liferay_logo.svg';
 import animatedNotFoundIllustration from 'assets/images/animated_not_found_illustration.gif';
 
-const CardListRepos = (): JSX.Element => {
+const CardListRepos = () => {
   const { repositories, setRepositories, setIsStarred } = useHomeContext();
   const {
     filteredRepos,
@@ -66,7 +65,7 @@ const CardListRepos = (): JSX.Element => {
                   <ClayCard.Row
                     style={{ height: '50px', alignItems: 'center' }}
                   >
-                    <img alt="Liferay logo" src={liferayLogo} />
+                    <img alt="Liferay" src={liferayLogo} />
 
                     <ClayLayout.Col size={8}>
                       <ClayCard.Description displayType="title">

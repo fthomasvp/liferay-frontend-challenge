@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, cleanup } from 'utils/test-utils';
 import { TGitHubRepo } from 'features/github';
-import Header from './header.component';
+import Header from './Header';
 
 describe('Header', () => {
   afterEach(cleanup);
@@ -49,7 +49,7 @@ describe('Header', () => {
       searchBarProviderProps,
     });
 
-    expect(getByRole('img', { name: 'github logo' })).toBeInTheDocument();
+    expect(getByRole('img', { name: 'github' })).toBeInTheDocument();
 
     expect(
       getByRole('button', { name: 'Filter and order' })

@@ -1,5 +1,11 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
-import type { PropsWithChildren } from 'react';
+import React, {
+  PropsWithChildren,
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+  ReactNode,
+} from 'react';
 
 import { TGitHubRepo } from 'features/github';
 
@@ -13,18 +19,16 @@ export type THomeContext = {
 export const HomeContext = createContext<THomeContext | undefined>(undefined);
 
 export const useHomeContext = () => {
-  const home = useContext(HomeContext);
+  const context = useContext(HomeContext);
 
-  if (!home) {
+  if (!context) {
     throw new Error('useHomeContext must be used within a HomeContext');
   }
 
-  return home;
+  return context;
 };
 
-export const HomeProvider = ({
-  children,
-}: PropsWithChildren<React.ReactNode>) => {
+export const HomeProvider = ({ children }: PropsWithChildren<ReactNode>) => {
   const [repositories, setRepositories] = useState<TGitHubRepo[]>([]);
   const [isStarred, setIsStarred] = useState(false);
 

@@ -6,7 +6,7 @@ import ClayEmptyState from '@clayui/empty-state';
 
 import animatedNotFoundIllustration from 'assets/images/animated_not_found_illustration.gif';
 
-const NotFoundPage = (): JSX.Element => {
+const NotFoundPage = () => {
   return (
     <ClayLayout.ContainerFluid view>
       <ClayEmptyState

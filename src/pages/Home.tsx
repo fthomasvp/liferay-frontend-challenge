@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { SearchBarContextProvider } from 'context/search-bar/search-bar.context';
-import Header from 'components/header/header.component';
-import CardListRepos from 'components/card-list-repos/card-list-repos.component';
-import ErrorBoundary from 'components/error-boundary/error-boundary.component';
+import { SearchBarContextProvider } from 'context/SearchBarContext';
+import { Header } from 'components/Header';
+
+import ErrorBoundary from 'components/ErrorBoundary';
 import { HomeProvider } from 'context/HomeContext';
+import { CardListRepos } from 'features/github';
 
 const HomePage = () => {
   return (

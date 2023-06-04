@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, cleanup } from 'utils/test-utils';
 import { TGitHubRepo } from 'features/github';
-import SearchBar from './search-bar.component';
+import SearchBar from './SearchBar';
 
 describe.only('SearchBar', () => {
   afterEach(cleanup);

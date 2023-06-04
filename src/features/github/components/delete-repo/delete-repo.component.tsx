@@ -4,7 +4,7 @@ import ClayButton from '@clayui/button';
 import ClayModal, { useModal } from '@clayui/modal';
 
 import { useHomeContext } from 'context/HomeContext';
-import { useSearchBarContext } from 'hooks/use-search-bar.hook';
+import { useSearchBarContext } from 'context/SearchBarContext';
 import { TGitHubRepo } from 'features/github';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
   setVisible: (isVisible: boolean) => void;
 };
 
-const DeleteRepoModal = ({ repo, visible, setVisible }: Props): JSX.Element => {
+const DeleteRepoModal = ({ repo, visible, setVisible }: Props) => {
   const { repositories, setRepositories } = useHomeContext();
   const { isFiltering, setFilteredRepos } = useSearchBarContext();
 
