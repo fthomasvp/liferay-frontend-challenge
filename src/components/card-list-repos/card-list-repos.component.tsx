@@ -7,19 +7,15 @@ import ClayLabel from '@clayui/label';
 import ClayEmptyState from '@clayui/empty-state';
 import ClayButton, { ClayButtonWithIcon } from '@clayui/button';
 
-import { useHomeContext } from 'hooks/use-home.hook';
+import { useHomeContext } from 'context/HomeContext';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
-import { GitHubRepo } from 'services/github.service';
+import { TGitHubRepo } from 'features/github';
 import DeleteRepoModal from '../delete-repo/delete-repo.component';
 import liferayLogo from 'assets/icons/liferay_logo.svg';
 import animatedNotFoundIllustration from 'assets/images/animated_not_found_illustration.gif';
 
 const CardListRepos = (): JSX.Element => {
-  const {
-    repositories,
-    setRepositories,
-    setIsFilteringFavorites,
-  } = useHomeContext();
+  const { repositories, setRepositories, setIsStarred } = useHomeContext();
   const {
     filteredRepos,
     setFilteredRepos,
@@ -28,11 +24,11 @@ const CardListRepos = (): JSX.Element => {
   } = useSearchBarContext();
 
   const [isDeleteRepoVisible, setIsDeleteRepoVisible] = useState(false);
-  const [selectedRepo, setSelectedRepo] = useState<GitHubRepo | null>(null);
+  const [selectedRepo, setSelectedRepo] = useState<TGitHubRepo | null>(null);
 
   const items = isFiltering ? filteredRepos : repositories;
 
-  const favoriteRepo = ({ id }: GitHubRepo) => {
+  const favoriteRepo = ({ id }: TGitHubRepo) => {
     const repos = repositories.map((repository) => {
       if (repository.id === id) {
         repository.isFavorited = !repository.isFavorited;
@@ -50,10 +46,10 @@ const CardListRepos = (): JSX.Element => {
 
   const handleClickClearFilter = () => {
     setIsFiltering(false);
-    setIsFilteringFavorites(false);
+    setIsStarred(false);
   };
 
-  const handleClickOpenDeleteRepo = (repo: GitHubRepo) => {
+  const handleClickOpenDeleteRepo = (repo: TGitHubRepo) => {
     setIsDeleteRepoVisible(true);
 
     setSelectedRepo(repo);

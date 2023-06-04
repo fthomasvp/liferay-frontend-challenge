@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { render, cleanup } from 'utils/test-utils';
-import { GitHubRepo } from 'services/github.service';
+import { TGitHubRepo } from 'features/github';
 import SearchBar from './search-bar.component';
 
 describe.only('SearchBar', () => {
   afterEach(cleanup);
 
-  const repositories: GitHubRepo[] = [
+  const repositories: TGitHubRepo[] = [
     {
       id: 22377139,
       full_name: 'liferay/clay',
@@ -26,8 +26,8 @@ describe.only('SearchBar', () => {
 
   const homeProviderProps = {
     value: {
-      isFilteringFavorites: false,
-      setIsFilteringFavorites: jest.fn(),
+      isStarred: false,
+      setIsStarred: jest.fn(),
       repositories,
       setRepositories: jest.fn(),
     },

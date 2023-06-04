@@ -6,11 +6,11 @@ import React, {
   useState,
 } from 'react';
 
-import { GitHubRepo } from 'services/github.service';
+import { TGitHubRepo } from 'features/github';
 
 export type SearchBarContextType = {
-  filteredRepos: GitHubRepo[];
-  setFilteredRepos: Dispatch<SetStateAction<GitHubRepo[]>>;
+  filteredRepos: TGitHubRepo[];
+  setFilteredRepos: Dispatch<SetStateAction<TGitHubRepo[]>>;
   isFiltering: boolean;
   setIsFiltering: Dispatch<SetStateAction<boolean>>;
   isShowMobile: boolean;
@@ -36,7 +36,7 @@ export const SearchBarContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [filteredRepos, setFilteredRepos] = useState<GitHubRepo[]>([]);
+  const [filteredRepos, setFilteredRepos] = useState<TGitHubRepo[]>([]);
   const [isFiltering, setIsFiltering] = useState<boolean>(false);
   const [isShowMobile, setIsShowMobile] = useState<boolean>(false);
 

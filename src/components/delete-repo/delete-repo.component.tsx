@@ -3,12 +3,12 @@ import React from 'react';
 import ClayButton from '@clayui/button';
 import ClayModal, { useModal } from '@clayui/modal';
 
-import { useHomeContext } from 'hooks/use-home.hook';
+import { useHomeContext } from 'context/HomeContext';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
-import { GitHubRepo } from 'services/github.service';
+import { TGitHubRepo } from 'features/github';
 
 type Props = {
-  repo: GitHubRepo | null;
+  repo: TGitHubRepo | null;
   visible: boolean;
   setVisible: (isVisible: boolean) => void;
 };

@@ -7,11 +7,11 @@ import ClayIcon from '@clayui/icon';
 import { ClayDropDownWithItems } from '@clayui/drop-down';
 import { IItem } from '@clayui/drop-down/lib/drilldown/Menu';
 
-import { useHomeContext } from 'hooks/use-home.hook';
+import { useHomeContext } from 'context/HomeContext';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
 import SearchBar from '../search-bar/search-bar.component';
 import AddRepoPopover from 'components/add-repo/add-repo.component';
-import { GitHubRepo } from 'services/github.service';
+import { TGitHubRepo } from 'features/github';
 import githubIcon from 'assets/icons/github.svg';
 import './header.styles.css';
 
@@ -28,8 +28,8 @@ const Header = (): JSX.Element => {
   const {
     repositories,
     setRepositories,
-    isFilteringFavorites,
-    setIsFilteringFavorites,
+    isStarred,
+    setIsStarred,
   } = useHomeContext();
   const {
     isFiltering,
@@ -44,15 +44,13 @@ const Header = (): JSX.Element => {
 
   const handleClickFilterFavorites = () => {
     setIsFiltering(true);
-    setIsFilteringFavorites(
-      (prevIsFilteringFavorites) => !prevIsFilteringFavorites
-    );
+    setIsStarred(!isStarred);
   };
 
   const sortReposBy = (field: string) => {
     setIsFiltering(true);
 
-    const repos = _orderBy(repositories, [field], ['desc']) as GitHubRepo[];
+    const repos = _orderBy(repositories, [field], ['desc']) as TGitHubRepo[];
 
     setRepositories(repos);
     setFieldToSort(field);
@@ -96,12 +94,12 @@ const Header = (): JSX.Element => {
   useEffect(() => {
     let repos = repositories;
 
-    if (isFilteringFavorites) {
+    if (isStarred) {
       repos = repositories.filter(({ isFavorited }) => isFavorited);
     }
 
     setFilteredRepos(repos);
-  }, [isFilteringFavorites, repositories]);
+  }, [isStarred, repositories]);
 
   useEffect(() => {
     if (isFiltering && fieldToSort) {
@@ -109,7 +107,7 @@ const Header = (): JSX.Element => {
         filteredRepos,
         [fieldToSort],
         ['desc']
-      ) as GitHubRepo[];
+      ) as TGitHubRepo[];
 
       setFilteredRepos(repos);
     }
@@ -173,7 +171,7 @@ const Header = (): JSX.Element => {
             displayType="unstyled"
             onClick={handleClickFilterFavorites}
           >
-            <ClayIcon symbol={isFilteringFavorites ? 'star' : 'star-o'} />
+            <ClayIcon symbol={isStarred ? 'star' : 'star-o'} />
           </ClayButton>
         </ClayManagementToolbar.Item>
 

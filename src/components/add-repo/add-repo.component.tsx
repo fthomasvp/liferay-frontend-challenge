@@ -6,43 +6,37 @@ import ClayIcon from '@clayui/icon';
 import ClayPopover from '@clayui/popover';
 import { ClayButtonWithIcon } from '@clayui/button';
 
-import { getRepository, getRepositoryCommits } from 'services/github.service';
-import { useHomeContext } from 'hooks/use-home.hook';
+import { getRepository, getRepositoryCommits } from 'features/github/services';
+import { useHomeContext } from 'context/HomeContext';
 
 const AddRepoPopover = (): JSX.Element => {
   const { repositories, setRepositories } = useHomeContext();
 
-  const [feedbackError, setFeedbackError] = useState('');
+  const [error, setError] = useState('');
   const [repoName, setRepoName] = useState('');
   const [isShowPopover, setIsShowPopover] = useState(false);
 
   const repoNameRef = useRef<HTMLInputElement | null>(null);
 
-  const handleClickAddRepo = async () => {
+  const handleAddRepo = async () => {
     /**
      * RegEx to validate repository full name.
-     * The user should provide an input with at least
+     * The user must provide an input with at least
      * one word, followed by a slash and another word.
      */
     if (!repoName.match(/\w{1,}\/\w{1,}/gm)) {
-      setFeedbackError('This is not a valid repository full name.');
+      setError('This is not a valid repository full name.');
 
       return;
     }
 
     const [username, repositoryName] = repoName.split('/');
 
-    let response = await getRepository({ username, repositoryName });
-
-    if (!response.ok) {
-      setFeedbackError('The repository is private or does not exist.');
-
-      return;
-    }
-
-    const repository = await response.json();
+    const repository = await getRepository({ username, repositoryName });
 
     if (!repository) {
+      setError('The repository is private or does not exist.');
+
       return;
     }
 
@@ -51,31 +45,30 @@ const AddRepoPopover = (): JSX.Element => {
     );
 
     if (isDuplicatedRepo) {
-      setFeedbackError('This repository is already included.');
+      setError('This repository is already included in your list.');
 
       return;
     }
 
-    response = await getRepositoryCommits({
+    const commits = await getRepositoryCommits({
       repositoryName,
       username,
     });
 
-    const [lastCommit] = await response.json();
+    const [lastCommit] = commits;
 
     if (!lastCommit) {
       alert('The repository does not contains commits');
       repository.lastCommitAt = null;
     } else {
       const { date } = lastCommit.commit.committer;
-
       repository.lastCommitAt = date;
     }
 
     // Add `isFavorited` property (default is false)
     repository.isFavorited = false;
 
-    setRepositories((prevRepos) => [repository, ...prevRepos]);
+    setRepositories([repository, ...repositories]);
 
     onClosePopover();
   };
@@ -84,21 +77,21 @@ const AddRepoPopover = (): JSX.Element => {
     if (e.key === 'Enter') {
       e.preventDefault();
 
-      handleClickAddRepo();
+      handleAddRepo();
     }
   };
 
   const handleChangeRepoName = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
-    setFeedbackError('');
+    setError('');
     setRepoName(target.value);
   };
 
   const onClosePopover = () => {
     setIsShowPopover(false);
     setRepoName('');
-    setFeedbackError('');
+    setError('');
   };
 
   useEffect(() => {
@@ -117,7 +110,7 @@ const AddRepoPopover = (): JSX.Element => {
         <>
           <p className="font-weight-semi-bold popover-title">New repository</p>
 
-          <ClayForm.Group className={feedbackError ? 'has-error' : ''}>
+          <ClayForm.Group className={error ? 'has-error' : ''}>
             <label
               className="font-weight-semi-bold input-label"
               htmlFor="repository"
@@ -136,10 +129,10 @@ const AddRepoPopover = (): JSX.Element => {
               type="text"
               value={repoName}
             />
-            {feedbackError && (
+            {error && (
               <ClayForm.FeedbackItem>
                 <ClayForm.FeedbackIndicator symbol="exclamation-full" />
-                {feedbackError}
+                {error}
               </ClayForm.FeedbackItem>
             )}
           </ClayForm.Group>
@@ -154,9 +147,9 @@ const AddRepoPopover = (): JSX.Element => {
           Cancel
         </ClayButton>
         <ClayButton
-          disabled={Boolean(feedbackError)}
+          disabled={Boolean(error)}
           displayType="primary"
-          onClick={handleClickAddRepo}
+          onClick={handleAddRepo}
         >
           Add
         </ClayButton>

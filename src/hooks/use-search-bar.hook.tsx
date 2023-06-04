@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { SearchBarContext } from 'contexts/search-bar/search-bar.context';
+import { SearchBarContext } from 'context/search-bar/search-bar.context';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useSearchBarContext = () => {

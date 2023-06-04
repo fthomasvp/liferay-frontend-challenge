@@ -1,7 +1,7 @@
 
 # Liferay Frontend Challenge
 
-MVP for gather data from GitHub API and display insightful information about a given GitHub repository.
+Fetch data from GitHub API and display insightful informations regarding a given repository.
 
 ## Installation
 

@@ -12,14 +12,14 @@ const NotFoundPage = (): JSX.Element => {
       <ClayEmptyState
         description="Looks like you are trying to access a page that does not exist"
         imgProps={{
-          alt: 'satellite up and down',
+          alt: 'satellite moving up and down',
           title: 'page not found',
         }}
         imgSrc={animatedNotFoundIllustration}
         title="404 - Page not found"
       >
         <Link to="/">
-          <p>Please go back or click on this link</p>
+          <p>Go to Home page</p>
         </Link>
       </ClayEmptyState>
     </ClayLayout.ContainerFluid>

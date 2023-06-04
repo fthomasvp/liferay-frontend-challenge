@@ -2,13 +2,13 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { render, cleanup } from 'utils/test-utils';
-import { GitHubRepo } from 'services/github.service';
+import { TGitHubRepo } from 'features/github';
 import AddRepoPopover from './add-repo.component';
 
 describe('AddRepoPopover', () => {
   afterEach(cleanup);
 
-  const repositories: GitHubRepo[] = [
+  const repositories: TGitHubRepo[] = [
     {
       id: 22377139,
       full_name: 'liferay/clay',
@@ -27,8 +27,8 @@ describe('AddRepoPopover', () => {
 
   const homeProviderProps = {
     value: {
-      isFilteringFavorites: false,
-      setIsFilteringFavorites: jest.fn(),
+      isStarred: false,
+      setIsStarred: jest.fn(),
       repositories,
       setRepositories: jest.fn(),
     },

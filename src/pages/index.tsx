@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import LoadingIndicator from 'components/loading-indicator/loading-indicator.component';
 
-const HomePage = React.lazy(() => import('pages/home/home.page'));
-const NotFoundPage = React.lazy(() => import('pages/not-found/not-found.page'));
+const HomePage = React.lazy(() => import('pages/Home'));
+const NotFoundPage = React.lazy(() => import('pages/404'));
 
 const AppRoutes = (): JSX.Element => {
   return (

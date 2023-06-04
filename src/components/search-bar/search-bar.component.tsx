@@ -4,12 +4,12 @@ import ClayManagementToolbar from '@clayui/management-toolbar';
 import { ClayInput } from '@clayui/form';
 import { ClayButtonWithIcon } from '@clayui/button';
 
-import { useHomeContext } from 'hooks/use-home.hook';
+import { useHomeContext } from 'context/HomeContext';
 import { useSearchBarContext } from 'hooks/use-search-bar.hook';
-import { GitHubRepo } from 'services/github.service';
+import { TGitHubRepo } from 'features/github';
 import { MINIMUM_REPO_NAME_LENGTH } from 'utils/constants';
 
-const SearchBar = (): JSX.Element => {
+const SearchBar = () => {
   const { repositories } = useHomeContext();
   const {
     isShowMobile,
@@ -33,7 +33,7 @@ const SearchBar = (): JSX.Element => {
     ) {
       setIsFiltering(true);
 
-      let filteredRepos: GitHubRepo[] = [];
+      let filteredRepos: TGitHubRepo[] = [];
 
       filteredRepos = repositories.filter(({ full_name }) =>
         full_name.match(new RegExp(repoName, 'i'))

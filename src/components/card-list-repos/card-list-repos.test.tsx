@@ -2,13 +2,13 @@ import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 
 import { render, cleanup } from 'utils/test-utils';
-import { GitHubRepo } from 'services/github.service';
+import { TGitHubRepo } from 'features/github';
 import ListRepos from './card-list-repos.component';
 
 describe('ListRepos', () => {
   afterEach(cleanup);
 
-  const repositories: GitHubRepo[] = [
+  const repositories: TGitHubRepo[] = [
     {
       id: 22377139,
       full_name: 'liferay/clay',
@@ -27,8 +27,8 @@ describe('ListRepos', () => {
 
   const homeProviderProps = {
     value: {
-      isFilteringFavorites: false,
-      setIsFilteringFavorites: jest.fn(),
+      isStarred: false,
+      setIsStarred: jest.fn(),
       repositories,
       setRepositories: jest.fn(),
     },
