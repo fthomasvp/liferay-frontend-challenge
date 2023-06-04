@@ -5,7 +5,7 @@ import { Header } from 'components/Header';
 
 import ErrorBoundary from 'components/ErrorBoundary';
 import { HomeProvider } from 'context/HomeContext';
-import { CardListRepos } from 'features/github';
+import { CardList } from 'features/github';
 
 const HomePage = () => {
   return (
@@ -13,7 +13,7 @@ const HomePage = () => {
       <HomeProvider>
         <SearchBarContextProvider>
           <Header />
-          <CardListRepos />
+          <CardList />
         </SearchBarContextProvider>
       </HomeProvider>
     </ErrorBoundary>
