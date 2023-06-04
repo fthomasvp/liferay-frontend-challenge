@@ -9,11 +9,10 @@ import { IItem } from '@clayui/drop-down/lib/drilldown/Menu';
 
 import { useHomeContext } from 'context/HomeContext';
 import { useSearchBarContext } from 'context/SearchBarContext';
-import { SearchBar } from '../SearchBar';
-
 import { AddRepoPopover, TGitHubRepo } from 'features/github';
-import GitHubIcon from 'assets/icons/github.svg';
+import { SearchBar } from '../SearchBar';
 import { VIEW_TYPES } from 'utils/constants';
+import GitHubIcon from 'assets/icons/github.svg';
 import './styles.css';
 
 const Header = () => {
@@ -140,7 +139,6 @@ const Header = () => {
         </ClayManagementToolbar.Item>
       </ClayManagementToolbar.ItemList>
 
-      {/* Search Bar */}
       <SearchBar />
 
       <ClayManagementToolbar.ItemList>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ClayLayout from '@clayui/layout';
 import ClayEmptyState from '@clayui/empty-state';
 
-import animatedNotFoundIllustration from 'assets/images/animated_not_found_illustration.gif';
+import AnimatedSatellite from 'assets/images/animated_satellite.gif';
 
 const NotFoundPage = () => {
   return (
@@ -15,7 +15,7 @@ const NotFoundPage = () => {
           alt: 'satellite moving up and down',
           title: 'page not found',
         }}
-        imgSrc={animatedNotFoundIllustration}
+        imgSrc={AnimatedSatellite}
         title="404 - Page not found"
       >
         <Link to="/">

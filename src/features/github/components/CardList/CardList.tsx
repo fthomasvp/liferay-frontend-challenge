@@ -10,7 +10,7 @@ import { DeleteRepoModal, TGitHubRepo } from 'features/github';
 import { Card } from 'components/Card';
 
 import LiferayLogo from 'assets/icons/liferay_logo.svg';
-import animatedNotFoundIllustration from 'assets/images/animated_not_found_illustration.gif';
+import AnimatedSatellite from 'assets/images/animated_satellite.gif';
 
 const CardList = () => {
   const { repositories, setRepositories, setIsStarred } = useHomeContext();
@@ -75,10 +75,10 @@ const CardList = () => {
               <ClayEmptyState
                 description="No results were found that matched"
                 imgProps={{
-                  alt: 'satellite up and down',
+                  alt: 'Satellite moving up and down',
                   title: 'repository not found',
                 }}
-                imgSrc={animatedNotFoundIllustration}
+                imgSrc={AnimatedSatellite}
                 title="Something went wrong!"
               >
                 <ClayButton
@@ -91,12 +91,12 @@ const CardList = () => {
             )
           : items.length === 0 && (
               <ClayEmptyState
-                description="Add some repositories by clicking add new repository"
+                description="Add some repositories by clicking on the blue add button"
                 imgProps={{
-                  alt: 'satellite up and down',
-                  title: 'waiting for a repository',
+                  alt: 'Satellite moving up and down',
+                  title: 'Waiting for a repository to be added',
                 }}
-                imgSrc={animatedNotFoundIllustration}
+                imgSrc={AnimatedSatellite}
                 title="There is still nothing here"
               />
             )}

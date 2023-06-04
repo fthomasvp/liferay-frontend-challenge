@@ -1,7 +1,5 @@
 import React, {
   createContext,
-  Dispatch,
-  SetStateAction,
   ReactNode,
   useState,
   useContext,
@@ -14,12 +12,11 @@ import { TGitHubRepo } from 'features/github';
 
 export type TSearchBarContext = {
   filteredRepos: TGitHubRepo[];
-  // TODO: update this type to use memoized function
   setFilteredRepos: (repos: TGitHubRepo[]) => void;
   isFiltering: boolean;
-  setIsFiltering: Dispatch<SetStateAction<boolean>>;
+  setIsFiltering: (isFiltering: boolean) => void;
   isShowMobile: boolean;
-  setIsShowMobile: Dispatch<SetStateAction<boolean>>;
+  setIsShowMobile: (isShowMobile: boolean) => void;
 };
 
 export const SearchBarContext = createContext<TSearchBarContext | undefined>(
@@ -49,16 +46,31 @@ export const SearchBarContextProvider = ({
     setFilteredRepos(repos);
   }, []);
 
+  const setFiltering = useCallback((isFiltering: boolean) => {
+    setIsFiltering(isFiltering);
+  }, []);
+
+  const setShowMobile = useCallback((isShowMobile: boolean) => {
+    setIsShowMobile(isShowMobile);
+  }, []);
+
   const contextValue = useMemo(
     () => ({
       filteredRepos,
       setFilteredRepos: setReposFilter,
       isFiltering,
-      setIsFiltering,
+      setIsFiltering: setFiltering,
       isShowMobile,
-      setIsShowMobile,
+      setIsShowMobile: setShowMobile,
     }),
-    [filteredRepos, setReposFilter, isFiltering, isShowMobile]
+    [
+      filteredRepos,
+      setReposFilter,
+      isFiltering,
+      setFiltering,
+      isShowMobile,
+      setShowMobile,
+    ]
   );
 
   return (

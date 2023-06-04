@@ -3,7 +3,7 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 import ClayEmptyState from '@clayui/empty-state';
 import ClayLayout from '@clayui/layout';
 
-import animatedNotFoundIllustration from 'assets/images/animated_not_found_illustration.gif';
+import AnimatedSatellite from 'assets/images/animated_satellite.gif';
 
 interface IProps {
   children?: ReactNode;
@@ -37,7 +37,7 @@ export default class ErrorBoundary extends Component<IProps, IState> {
               alt: 'Satellite moving up and down',
               title: 'error',
             }}
-            imgSrc={animatedNotFoundIllustration}
+            imgSrc={AnimatedSatellite}
             title="Oops! Something went wrong"
           />
         </ClayLayout.ContainerFluid>
