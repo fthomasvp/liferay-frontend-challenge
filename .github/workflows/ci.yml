@@ -11,41 +11,23 @@ on:
     branches: [develop, master]
 
 jobs:
-  audit_dependencies:
-    name: Audit Dependencies
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Use Node.js 14
-        uses: actions/setup-node@v2
-        with:
-          node-version: "14.x"
-
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile --silent
-
-      - name: Audit
-        # Should be changed to `false`
-        continue-on-error: true
-        run: yarn audit
-
   build:
-    name: Build
+    name: Build and Test
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Use Node.js 14
-        uses: actions/setup-node@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: "14.x"
+          node-version: ${{ matrix.node-version }}
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile --silent
@@ -53,30 +35,13 @@ jobs:
       - name: Build
         run: yarn build
 
-  unit_tests:
-    name: Unit Tests
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Use Node.js 14
-        uses: actions/setup-node@v2
-        with:
-          node-version: "14.x"
-
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile --silent
-
       - name: Unit Tests
         run: yarn test
 
   release:
     name: Release
     if: ${{ success() && github.ref_name == 'master' }}
-    needs: ["build", "unit_tests"]
+    needs: ["build"]
 
     runs-on: ubuntu-latest
 
@@ -84,10 +49,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use Node.js 14
-        uses: actions/setup-node@v2
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
         with:
-          node-version: "14.x"
+          node-version: "18.x"
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile --silent
