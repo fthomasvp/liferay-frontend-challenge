@@ -11,9 +11,11 @@ import { useHomeContext } from 'context/HomeContext';
 import { useSearchBarContext } from 'context/SearchBarContext';
 import { AddRepoPopover, TGitHubRepo } from 'features/github';
 import { SearchBar } from '../SearchBar';
-import { VIEW_TYPES } from 'utils/constants';
+import { LIST_VIEW_OPTIONS } from 'utils/constants';
 import GitHubIcon from 'assets/icons/github.svg';
 import './styles.css';
+
+const [currentView] = LIST_VIEW_OPTIONS;
 
 const Header = () => {
   const {
@@ -31,9 +33,7 @@ const Header = () => {
 
   const [fieldToSort, setFieldToSort] = useState('');
 
-  const viewTypeActive = VIEW_TYPES.find((type) => type.active);
-
-  const handleClickFilterFavorites = () => {
+  const handleFilterFavorites = () => {
     setIsFiltering(true);
     setIsStarred(!isStarred);
   };
@@ -159,7 +159,7 @@ const Header = () => {
             className="nav-link nav-link-monospaced"
             disabled={repositories.length === 0}
             displayType="unstyled"
-            onClick={handleClickFilterFavorites}
+            onClick={handleFilterFavorites}
           >
             <ClayIcon symbol={isStarred ? 'star' : 'star-o'} />
           </ClayButton>
@@ -177,13 +177,13 @@ const Header = () => {
 
         <ClayManagementToolbar.Item>
           <ClayDropDownWithItems
-            items={VIEW_TYPES}
+            items={LIST_VIEW_OPTIONS}
             trigger={
               <ClayButton
                 className="nav-link-monospaced nav-link"
                 displayType="unstyled"
               >
-                <ClayIcon symbol={viewTypeActive?.symbolLeft ?? ''} />
+                <ClayIcon symbol={currentView.symbolLeft} />
               </ClayButton>
             }
           />

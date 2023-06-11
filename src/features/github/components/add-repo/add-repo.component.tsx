@@ -1,4 +1,10 @@
-import React, { KeyboardEvent, useEffect, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  KeyboardEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import ClayButton from '@clayui/button';
 import ClayForm, { ClayInput } from '@clayui/form';
@@ -6,26 +12,22 @@ import ClayIcon from '@clayui/icon';
 import ClayPopover from '@clayui/popover';
 import { ClayButtonWithIcon } from '@clayui/button';
 
-import { getRepository, getRepositoryCommits } from 'features/github/services';
+import { getRepository, getRepositoryCommits } from 'features/github';
 import { useHomeContext } from 'context/HomeContext';
+import { isValidRepositoryName } from 'utils/validations';
 
 const AddRepoPopover = () => {
   const { repositories, setRepositories } = useHomeContext();
 
   const [error, setError] = useState('');
   const [repoName, setRepoName] = useState('');
-  const [isShowPopover, setIsShowPopover] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const repoNameRef = useRef<HTMLInputElement | null>(null);
 
   const handleAddRepo = async () => {
-    /**
-     * RegEx to validate repository full name.
-     * The user must provide an input with at least
-     * one word, followed by a slash and another word.
-     */
-    if (!repoName.match(/\w{1,}\/\w{1,}/gm)) {
-      setError('This is not a valid repository full name.');
+    if (!isValidRepositoryName(repoName)) {
+      setError('Repository full name is not valid');
 
       return;
     }
@@ -35,7 +37,7 @@ const AddRepoPopover = () => {
     const repository = await getRepository({ username, repositoryName });
 
     if (!repository) {
-      setError('The repository is private or does not exist.');
+      setError('Repository is private or does not exist');
 
       return;
     }
@@ -45,7 +47,7 @@ const AddRepoPopover = () => {
     );
 
     if (isDuplicatedRepo) {
-      setError('This repository is already included in your list.');
+      setError('Repository is already included in your list');
 
       return;
     }
@@ -70,7 +72,7 @@ const AddRepoPopover = () => {
 
     setRepositories([repository, ...repositories]);
 
-    onClosePopover();
+    handleClosePopover();
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -81,24 +83,22 @@ const AddRepoPopover = () => {
     }
   };
 
-  const handleChangeRepoName = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRepoName = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setError('');
     setRepoName(target.value);
   };
 
-  const onClosePopover = () => {
-    setIsShowPopover(false);
-    setRepoName('');
+  const handleClosePopover = () => {
+    setIsOpen(false);
     setError('');
+    setRepoName('');
   };
 
   useEffect(() => {
-    if (isShowPopover && repoNameRef.current) {
+    if (isOpen && repoNameRef.current) {
       repoNameRef.current.focus();
     }
-  }, [isShowPopover]);
+  }, [isOpen]);
 
   return (
     <ClayPopover
@@ -121,8 +121,8 @@ const AddRepoPopover = () => {
             <ClayInput
               id="repository"
               onChange={handleChangeRepoName}
-              onKeyPress={handleKeyPress}
-              placeholder="e.g. liferay/clay"
+              onKeyDown={handleKeyPress}
+              placeholder="liferay/clay"
               ref={repoNameRef}
               type="text"
               value={repoName}
@@ -136,12 +136,12 @@ const AddRepoPopover = () => {
           </ClayForm.Group>
         </>
       }
-      onShowChange={setIsShowPopover}
-      show={isShowPopover}
+      onShowChange={setIsOpen}
+      show={isOpen}
       trigger={<ClayButtonWithIcon aria-label="Add button" symbol="plus" />}
     >
       <ClayButton.Group className="d-flex justify-content-end" spaced>
-        <ClayButton displayType="secondary" onClick={onClosePopover}>
+        <ClayButton displayType="secondary" onClick={handleClosePopover}>
           Cancel
         </ClayButton>
         <ClayButton
