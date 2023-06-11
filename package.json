@@ -13,7 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "lint": "eslint --fix \"{src,apps,libs,test,spec}/**/*.{ts,tsx}\""
@@ -30,12 +30,13 @@
     "@clayui/layout": "^3.3.0",
     "@clayui/loading-indicator": "^3.40.0",
     "@clayui/management-toolbar": "^3.3.0",
-    "@clayui/modal": "^3.8.5",
+    "@clayui/modal": "^3.96.0",
     "@clayui/panel": "^3.25.0",
     "@clayui/popover": "^3.5.5",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^1.4.0",
     "date-fns": "^2.19.0",
     "lodash.orderby": "^4.6.0",
     "react": "^17.0.1",
@@ -48,6 +49,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^26.0.15",
     "@types/lodash.orderby": "^4.6.6",
     "@types/node": "^12.0.0",
@@ -58,6 +60,7 @@
     "@typescript-eslint/parser": "^4.16.1",
     "eslint": "^7.21.0",
     "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.2.1"
   },
   "eslintConfig": {

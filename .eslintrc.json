@@ -11,7 +11,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -27,6 +28,7 @@
     "quotes": ["warn", "single"],
     "semi": ["warn", "always"],
     "no-console": "warn",
-    "indent": "off"
+    "indent": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }

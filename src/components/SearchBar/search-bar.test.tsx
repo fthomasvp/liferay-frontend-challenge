@@ -2,9 +2,9 @@ import React from 'react';
 
 import { render, cleanup } from 'utils/test-utils';
 import { TGitHubRepo } from 'features/github';
-import Header from './Header';
+import SearchBar from './SearchBar';
 
-describe('Header', () => {
+describe.only('SearchBar', () => {
   afterEach(cleanup);
 
   const repositories: TGitHubRepo[] = [
@@ -43,29 +43,17 @@ describe('Header', () => {
     },
   };
 
-  it('should show header components', async () => {
-    const { getByRole } = render(<Header />, {
+  it('should show input to search a repo by full name', async () => {
+    const { findByPlaceholderText, findByRole } = render(<SearchBar />, {
       homeProviderProps,
       searchBarProviderProps,
     });
 
-    expect(getByRole('img', { name: 'github' })).toBeInTheDocument();
-
     expect(
-      getByRole('button', { name: 'Filter and order' })
+      await findByPlaceholderText('liferay/clay')
     ).toBeInTheDocument();
-    expect(getByRole('button', { name: 'Stars' })).toBeInTheDocument();
-    expect(getByRole('button', { name: 'Forks' })).toBeInTheDocument();
-    expect(getByRole('button', { name: 'Open issues' })).toBeInTheDocument();
-    expect(getByRole('button', { name: 'Age' })).toBeInTheDocument();
-    expect(getByRole('button', { name: 'Last commit' })).toBeInTheDocument();
-
-    expect(getByRole('textbox', { name: 'Search' })).toBeInTheDocument();
-
     expect(
-      getByRole('button', { name: 'Star filter button' })
+      await findByRole('button', { name: 'Search Icon' })
     ).toBeInTheDocument();
-
-    expect(getByRole('button', { name: 'Add button' })).toBeInTheDocument();
   });
 });

@@ -1,11 +1,8 @@
 import React, { ProviderProps, ReactElement } from 'react';
 import { render } from '@testing-library/react';
 
-import { HomeContext, HomeContextType } from 'contexts/home/home.context';
-import {
-  SearchBarContext,
-  SearchBarContextType,
-} from 'contexts/search-bar/search-bar.context';
+import { HomeContext, THomeContext } from 'context/HomeContext';
+import { SearchBarContext, TSearchBarContext } from 'context/SearchBarContext';
 
 /**
  * A custom render to setup providers. Extends regular
@@ -22,8 +19,8 @@ const customRender = (
     searchBarProviderProps,
     ...renderOptions
   }: {
-    homeProviderProps: ProviderProps<HomeContextType>;
-    searchBarProviderProps: ProviderProps<SearchBarContextType>;
+    homeProviderProps: ProviderProps<THomeContext>;
+    searchBarProviderProps: ProviderProps<TSearchBarContext>;
   }
 ) => {
   return render(
