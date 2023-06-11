@@ -75,7 +75,7 @@ const AddRepoPopover = () => {
     handleClosePopover();
   };
 
-  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
 
@@ -121,7 +121,7 @@ const AddRepoPopover = () => {
             <ClayInput
               id="repository"
               onChange={handleChangeRepoName}
-              onKeyDown={handleKeyPress}
+              onKeyDown={handleKeyDown}
               placeholder="liferay/clay"
               ref={repoNameRef}
               type="text"

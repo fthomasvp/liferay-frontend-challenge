@@ -43,7 +43,7 @@ const SearchBar = () => {
     }
   };
 
-  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
 
@@ -59,7 +59,7 @@ const SearchBar = () => {
             aria-label="Search"
             className="input-group-inset input-group-inset-after"
             onChange={({ target }) => setRepoName(target.value)}
-            onKeyDown={handleKeyPress}
+            onKeyDown={handleKeyDown}
             placeholder="liferay/clay"
             type="text"
             value={repoName}

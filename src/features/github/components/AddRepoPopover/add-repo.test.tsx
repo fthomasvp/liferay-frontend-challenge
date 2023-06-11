@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { render, cleanup } from 'utils/test-utils';
 import { TGitHubRepo } from 'features/github';
-import AddRepoPopover from './add-repo.component';
+import AddRepoPopover from './AddRepoPopover';
 
 describe('AddRepoPopover', () => {
   afterEach(cleanup);
