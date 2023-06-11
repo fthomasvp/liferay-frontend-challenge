@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { render, cleanup } from 'utils/test-utils';
 import { TGitHubRepo } from 'features/github';
-import DeleteRepoModal from './delete-repo.component';
+import DeleteRepoModal from './DeleteRepoModal';
 
 describe('DeleteRepoModal', () => {
   afterEach(cleanup);

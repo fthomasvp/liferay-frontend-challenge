@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ClayLayout from '@clayui/layout';
 import ClayEmptyState from '@clayui/empty-state';
 import ClayButton from '@clayui/button';
+import { useModal } from '@clayui/modal';
 
 import { useHomeContext } from 'context/HomeContext';
 import { useSearchBarContext } from 'context/SearchBarContext';
@@ -12,7 +13,7 @@ import { Card } from 'components/Card';
 import LiferayLogo from 'assets/icons/liferay_logo.svg';
 import AnimatedSatellite from 'assets/images/animated_satellite.gif';
 
-const CardList = () => {
+const CardRepoList = () => {
   const { repositories, setRepositories, setIsStarred } = useHomeContext();
   const {
     filteredRepos,
@@ -20,9 +21,11 @@ const CardList = () => {
     isFiltering,
     setIsFiltering,
   } = useSearchBarContext();
+  const { observer, onOpenChange, open } = useModal();
 
-  const [isDeleteRepoVisible, setIsDeleteRepoVisible] = useState(false);
-  const [selectedRepo, setSelectedRepo] = useState<TGitHubRepo | null>(null);
+  const [repoId, setRepoId] = useState<number | null>(null);
+
+  const selectedRepo = repositories.find(({ id }) => id === repoId);
 
   const items = isFiltering ? filteredRepos : repositories;
 
@@ -43,12 +46,11 @@ const CardList = () => {
   };
 
   const handleDeleteRepo = (repo: TGitHubRepo) => {
-    setIsDeleteRepoVisible(true);
-
-    setSelectedRepo(repo);
+    onOpenChange(true);
+    setRepoId(repo.id);
   };
 
-  const handleClickClearFilter = () => {
+  const handleClearFilter = () => {
     setIsFiltering(false);
     setIsStarred(false);
   };
@@ -81,10 +83,7 @@ const CardList = () => {
                 imgSrc={AnimatedSatellite}
                 title="Something went wrong!"
               >
-                <ClayButton
-                  displayType="secondary"
-                  onClick={handleClickClearFilter}
-                >
+                <ClayButton displayType="secondary" onClick={handleClearFilter}>
                   Clear Filter
                 </ClayButton>
               </ClayEmptyState>
@@ -102,13 +101,16 @@ const CardList = () => {
             )}
       </ClayLayout.ContainerFluid>
 
-      <DeleteRepoModal
-        repo={selectedRepo}
-        visible={isDeleteRepoVisible}
-        setVisible={setIsDeleteRepoVisible}
-      />
+      {selectedRepo && (
+        <DeleteRepoModal
+          repo={selectedRepo}
+          isOpen={open}
+          setIsOpen={onOpenChange}
+          observer={observer}
+        />
+      )}
     </>
   );
 };
 
-export default CardList;
+export default CardRepoList;

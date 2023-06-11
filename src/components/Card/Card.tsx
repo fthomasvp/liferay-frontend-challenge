@@ -81,7 +81,9 @@ const Card = ({ repo, logo, onStar, onDelete }: Props) => {
 
               <ClayCard.Description data-testid="age" displayType="title">
                 Age{' '}
-                <span className="font-weight-normal">{repo.created_at}</span>
+                <span className="font-weight-normal">
+                  {formatDistanceTimeFromNow(repo.created_at)}
+                </span>
               </ClayCard.Description>
 
               <ClayCard.Description

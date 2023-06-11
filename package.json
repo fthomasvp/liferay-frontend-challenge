@@ -30,7 +30,7 @@
     "@clayui/layout": "^3.3.0",
     "@clayui/loading-indicator": "^3.40.0",
     "@clayui/management-toolbar": "^3.3.0",
-    "@clayui/modal": "^3.8.5",
+    "@clayui/modal": "^3.96.0",
     "@clayui/panel": "^3.25.0",
     "@clayui/popover": "^3.5.5",
     "@testing-library/jest-dom": "^5.11.4",

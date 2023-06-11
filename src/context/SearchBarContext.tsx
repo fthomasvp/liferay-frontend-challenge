@@ -35,7 +35,7 @@ export const useSearchBarContext = () => {
   return context;
 };
 
-export const SearchBarContextProvider = ({
+export const SearchBarProvider = ({
   children,
 }: PropsWithChildren<ReactNode>) => {
   const [filteredRepos, setFilteredRepos] = useState<TGitHubRepo[]>([]);

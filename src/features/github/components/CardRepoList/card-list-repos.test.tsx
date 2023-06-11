@@ -3,7 +3,7 @@ import { formatDistanceToNow } from 'date-fns';
 
 import { render, cleanup } from 'utils/test-utils';
 import { TGitHubRepo } from 'features/github';
-import ListRepos from './CardList';
+import ListRepos from './CardRepoList';
 
 describe('ListRepos', () => {
   afterEach(cleanup);

@@ -1,20 +1,19 @@
 import React from 'react';
 
-import { SearchBarContextProvider } from 'context/SearchBarContext';
 import { Header } from 'components/Header';
-
 import ErrorBoundary from 'components/ErrorBoundary';
+import { SearchBarProvider } from 'context/SearchBarContext';
 import { HomeProvider } from 'context/HomeContext';
-import { CardList } from 'features/github';
+import { CardRepoList } from 'features/github';
 
 const HomePage = () => {
   return (
     <ErrorBoundary>
       <HomeProvider>
-        <SearchBarContextProvider>
+        <SearchBarProvider>
           <Header />
-          <CardList />
-        </SearchBarContextProvider>
+          <CardRepoList />
+        </SearchBarProvider>
       </HomeProvider>
     </ErrorBoundary>
   );
