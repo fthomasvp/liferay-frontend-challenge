@@ -59,7 +59,7 @@ describe('AddRepoPopover', () => {
 
     expect(await findByLabelText('Repository')).toBeInTheDocument();
     expect(
-      await findByPlaceholderText('e.g. liferay/clay')
+      await findByPlaceholderText('liferay/clay')
     ).toBeInTheDocument();
   });
 

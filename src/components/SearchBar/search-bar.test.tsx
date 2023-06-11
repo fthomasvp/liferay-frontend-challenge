@@ -50,7 +50,7 @@ describe.only('SearchBar', () => {
     });
 
     expect(
-      await findByPlaceholderText('e.g. liferay/clay')
+      await findByPlaceholderText('liferay/clay')
     ).toBeInTheDocument();
     expect(
       await findByRole('button', { name: 'Search Icon' })
