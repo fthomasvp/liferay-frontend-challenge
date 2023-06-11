@@ -59,8 +59,8 @@ const SearchBar = () => {
             aria-label="Search"
             className="input-group-inset input-group-inset-after"
             onChange={({ target }) => setRepoName(target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="e.g. liferay/clay"
+            onKeyDown={handleKeyPress}
+            placeholder="liferay/clay"
             type="text"
             value={repoName}
           />
