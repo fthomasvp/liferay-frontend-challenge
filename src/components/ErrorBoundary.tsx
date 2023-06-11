@@ -23,7 +23,9 @@ export default class ErrorBoundary extends Component<IProps, IState> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    // eslint-disable-next-line no-console
     console.log('[ErrorBoundary][error]', error);
+    // eslint-disable-next-line no-console
     console.log('[ErrorBoundary][errorInfo]', JSON.stringify(errorInfo));
   }
 
