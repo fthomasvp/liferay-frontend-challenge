@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Header } from 'components/Header';
+import { Header } from 'components/Header2';
 import ErrorBoundary from 'components/ErrorBoundary';
 import { SearchBarProvider } from 'context/SearchBarContext';
 import { HomeProvider } from 'context/HomeContext';
